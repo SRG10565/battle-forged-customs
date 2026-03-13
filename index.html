@@ -5,1401 +5,1445 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Battle Forged Customs — Precision Firearm Customization</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Oswald:wght@400;600;700&family=Share+Tech+Mono&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Oswald:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #c9a227;
-    --gold-light: #f0c040;
-    --gold-dim: #8a6a10;
-    --red: #cc2200;
-    --blue: #1a3a6e;
-    --amber: #ff9900;
-    --crt-green: #39ff14;
-    --dark: #0a0a06;
-    --parchment: #c4a66a;
-    --parchment-dark: #7a6030;
-    --gunmetal: #1c1c1c;
-    --text-main: #e8d9a0;
-  }
+:root {
+  --ink: #1a0a00;
+  --gold: #f5c000;
+  --gold2: #e8a800;
+  --red: #d42b1e;
+  --red2: #a81e14;
+  --blue: #1c4b8c;
+  --blue2: #0e3270;
+  --blue-lt: #4a7abf;
+  --olive: #4a5c2a;
+  --olive2: #3a4a20;
+  --tan: #c8a96e;
+  --tan2: #e8d4a0;
+  --tan3: #f5e8c8;
+  --white: #fdf6e8;
+  --orange: #e87820;
+  --shadow: rgba(26,10,0,0.5);
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-  body {
-    background: var(--dark);
-    color: var(--text-main);
-    font-family: 'Oswald', sans-serif;
-    overflow-x: hidden;
-    cursor: crosshair;
-  }
+body {
+  background: var(--tan3);
+  color: var(--ink);
+  font-family: 'Oswald', sans-serif;
+  overflow-x: hidden;
+  cursor: crosshair;
+  /* Subtle halftone background */
+  background-image: radial-gradient(circle, rgba(26,10,0,0.06) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
 
-  /* ── SCANLINE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.18) 2px,
-      rgba(0,0,0,0.18) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
+/* ── THICK INK OUTLINE UTILITY ── */
+.ink-box {
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.ink-box-lg {
+  border: 4px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+}
 
-  /* ── CRT VIGNETTE ── */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);
-    pointer-events: none;
-    z-index: 9998;
-  }
+/* ══════════════════════════════
+   ACTION LINES BG (hero)
+══════════════════════════════ */
+.action-lines {
+  position: absolute; inset: 0;
+  background: repeating-conic-gradient(from 0deg at 60% 40%,
+    rgba(245,192,0,0.08) 0deg 2deg,
+    transparent 2deg 6deg
+  );
+  pointer-events: none;
+}
 
-  /* ── NOISE TEXTURE ── */
-  .noise {
-    position: fixed;
-    inset: 0;
-    opacity: 0.04;
-    pointer-events: none;
-    z-index: 9997;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-  }
+/* ══════════════════════════════
+   TOP BANNER — CLASSIFIED TAPE
+══════════════════════════════ */
+.top-tape {
+  background: var(--red);
+  border-bottom: 4px solid var(--ink);
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+.top-tape::before, .top-tape::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 40px;
+  z-index: 2;
+}
+.top-tape::before { left: 0; background: linear-gradient(90deg, var(--red), transparent); }
+.top-tape::after  { right: 0; background: linear-gradient(-90deg, var(--red), transparent); }
+.tape-inner {
+  display: inline-block;
+  animation: tapescroll 18s linear infinite;
+  font-family: 'Bangers', cursive;
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 5px;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+@keyframes tapescroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-  /* ══════════════════════════════
-     TOP CLASSIFIED TAPE
-  ══════════════════════════════ */
-  .classified-tape {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--gold) 0px, var(--gold) 20px,
-      #1a1a1a 20px, #1a1a1a 40px
-    );
-    padding: 6px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .classified-tape span {
-    font-family: 'Black Ops One', cursive;
-    font-size: 13px;
-    color: #000;
-    background: var(--gold);
-    padding: 2px 20px;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-  }
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav {
+  background: var(--olive);
+  border-bottom: 4px solid var(--ink);
+  padding: 0 40px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.nav-logo-wrap {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 44px; height: 44px;
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  transform: rotate(-3deg);
+}
+.nav-logo-text {
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 0 var(--ink), -1px -1px 0 var(--ink);
+  line-height: 1;
+}
+.nav-logo-text span { color: var(--red); text-shadow: 3px 3px 0 var(--ink); }
+.nav-links { display: flex; list-style: none; }
+.nav-links li { border-left: 2px solid rgba(255,255,255,0.1); }
+.nav-links a {
+  display: flex; align-items: center;
+  padding: 0 22px;
+  height: 100%;
+  font-family: 'Bangers', cursive;
+  font-size: 18px;
+  color: var(--tan2);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+}
+.nav-links a:hover { background: var(--olive2); color: var(--gold); }
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 8px; right: 8px;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.15s;
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta-wrap { display: flex; align-items: center; padding: 10px 0; }
+.nav-cta {
+  font-family: 'Bangers', cursive;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  background: var(--gold);
+  padding: 8px 22px;
+  text-decoration: none;
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: inline-block;
+}
+.nav-cta:hover { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
 
-  /* ══════════════════════════════
-     NAV
-  ══════════════════════════════ */
-  nav {
-    background: linear-gradient(180deg, #0d0d0a 0%, #141410 100%);
-    border-bottom: 2px solid var(--gold);
-    border-top: 1px solid var(--gold-dim);
-    padding: 12px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-logo {
-    font-family: 'Black Ops One', cursive;
-    font-size: 24px;
-    color: var(--gold);
-    text-shadow: 0 0 20px var(--gold), 0 0 40px rgba(201,162,39,0.4);
-    letter-spacing: 3px;
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--red); }
-  .nav-links {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--parchment);
-    text-decoration: none;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    position: relative;
-    transition: color 0.2s;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transition: transform 0.2s;
-    box-shadow: 0 0 8px var(--gold);
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-links a:hover::after { transform: scaleX(1); }
-  .nav-phone {
-    font-family: 'Share Tech Mono', monospace;
-    color: var(--amber);
-    font-size: 15px;
-    text-shadow: 0 0 12px var(--amber);
-    letter-spacing: 2px;
-  }
+/* ══════════════════════════════
+   HERO — COMIC SPLASH PAGE
+══════════════════════════════ */
+.hero {
+  background: var(--blue);
+  border-bottom: 5px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+.hero-halftone {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+}
+.action-burst {
+  position: absolute;
+  top: 0; right: -100px;
+  width: 700px; height: 700px;
+  background: conic-gradient(
+    from 0deg,
+    var(--gold) 0deg 8deg, transparent 8deg 18deg,
+    var(--gold) 18deg 26deg, transparent 26deg 36deg,
+    var(--gold) 36deg 44deg, transparent 44deg 54deg,
+    var(--gold) 54deg 62deg, transparent 62deg 72deg,
+    var(--gold) 72deg 80deg, transparent 80deg 90deg,
+    var(--gold) 90deg 98deg, transparent 98deg 108deg,
+    var(--gold) 108deg 116deg, transparent 116deg 126deg,
+    var(--gold) 126deg 134deg, transparent 134deg 144deg,
+    var(--gold) 144deg 152deg, transparent 152deg 162deg,
+    var(--gold) 162deg 170deg, transparent 170deg 180deg,
+    var(--gold) 180deg 188deg, transparent 188deg 198deg,
+    var(--gold) 198deg 206deg, transparent 206deg 216deg,
+    var(--gold) 216deg 224deg, transparent 224deg 234deg,
+    var(--gold) 234deg 242deg, transparent 242deg 252deg,
+    var(--gold) 252deg 260deg, transparent 260deg 270deg,
+    var(--gold) 270deg 278deg, transparent 278deg 288deg,
+    var(--gold) 288deg 296deg, transparent 296deg 306deg,
+    var(--gold) 306deg 314deg, transparent 314deg 324deg,
+    var(--gold) 324deg 332deg, transparent 332deg 342deg,
+    var(--gold) 342deg 350deg, transparent 350deg 360deg
+  );
+  opacity: 0.15;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
 
-  /* ══════════════════════════════
-     HERO
-  ══════════════════════════════ */
-  .hero {
-    position: relative;
-    min-height: 92vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,162,39,0.08) 0%, transparent 70%),
-      linear-gradient(180deg, #0a0a06 0%, #0e0e0a 100%);
-  }
+/* COMIC TITLE TREATMENT */
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  letter-spacing: 5px;
+  padding: 5px 16px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  margin-bottom: 16px;
+  transform: rotate(-1deg);
+}
+.hero-title {
+  font-family: 'Bangers', cursive;
+  line-height: 0.9;
+  margin-bottom: 16px;
+}
+.hero-title .line1 {
+  display: block;
+  font-size: clamp(72px, 10vw, 130px);
+  color: var(--gold);
+  text-shadow:
+    4px 4px 0 var(--ink),
+    -2px -2px 0 var(--ink),
+    2px -2px 0 var(--ink),
+    -2px 2px 0 var(--ink),
+    8px 8px 0 rgba(0,0,0,0.3);
+  letter-spacing: 4px;
+}
+.hero-title .line2 {
+  display: block;
+  font-size: clamp(48px, 7vw, 88px);
+  color: var(--white);
+  text-shadow:
+    3px 3px 0 var(--ink),
+    -1px -1px 0 var(--ink),
+    6px 6px 0 rgba(0,0,0,0.25);
+  letter-spacing: 6px;
+}
+.hero-title .line3 {
+  display: block;
+  font-size: clamp(28px, 4vw, 52px);
+  color: var(--red);
+  text-shadow:
+    3px 3px 0 var(--ink),
+    -1px -1px 0 var(--ink);
+  letter-spacing: 10px;
+  -webkit-text-stroke: 1px var(--ink);
+}
 
-  /* Grid lines background */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(201,162,39,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,162,39,0.07) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridDrift 20s linear infinite;
-  }
-  @keyframes gridDrift {
-    0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
-  }
+/* SPEECH BUBBLE */
+.speech-bubble {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 16px 20px;
+  position: relative;
+  margin: 20px 0;
+  max-width: 420px;
+}
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: -16px; left: 30px;
+  width: 0; height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 16px solid var(--ink);
+}
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: -11px; left: 33px;
+  width: 0; height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 13px solid var(--white);
+}
+.speech-bubble p {
+  font-family: 'Special Elite', cursive;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+.speech-bubble strong { font-family: 'Bangers', cursive; font-size: 17px; letter-spacing: 1px; color: var(--red); }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+.btn-comic {
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+  letter-spacing: 3px;
+  padding: 12px 32px;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.1s, box-shadow 0.1s;
+  cursor: crosshair;
+  position: relative;
+  overflow: hidden;
+}
+.btn-comic:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
+.btn-comic::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 0.3s;
+}
+.btn-comic:hover::before { transform: translateX(200%) skewX(-15deg); }
+.btn-gold-comic { background: var(--gold); color: var(--ink); }
+.btn-red-comic  { background: var(--red);  color: var(--white); }
+.btn-white-comic { background: var(--white); color: var(--ink); }
 
-  .hero-badge {
-    display: inline-block;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--crt-green);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px var(--crt-green);
-    border: 1px solid var(--crt-green);
-    padding: 4px 12px;
-    margin-bottom: 20px;
-    animation: blink 2s step-end infinite;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
+/* HERO RIGHT — CHARACTER CARD */
+.hero-card {
+  background: var(--tan2);
+  border: 4px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: rotate(2deg);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.hero-card:hover { transform: rotate(0deg) scale(1.02); }
+.hero-card-header {
+  background: var(--red);
+  border-bottom: 4px solid var(--ink);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero-card-header .label {
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+.hero-card-header .classified {
+  font-family: 'Bangers', cursive;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  border: 2px solid var(--gold);
+  padding: 2px 8px;
+}
+.hero-card-body { padding: 20px; }
+.character-silhouette {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(160deg, var(--olive) 0%, var(--olive2) 100%);
+  border: 3px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+/* Halftone on character area */
+.character-silhouette::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+.char-big { font-size: 100px; position: relative; z-index: 1; filter: drop-shadow(4px 4px 0 var(--ink)); }
+.char-action-lines {
+  position: absolute; inset: 0;
+  background: repeating-conic-gradient(from 0deg at 50% 110%,
+    rgba(255,200,0,0.1) 0deg 3deg, transparent 3deg 7deg);
+}
 
-  .hero-title {
-    font-family: 'Black Ops One', cursive;
-    font-size: clamp(48px, 7vw, 90px);
-    line-height: 0.95;
-    color: var(--gold);
-    text-shadow:
-      0 0 30px rgba(201,162,39,0.6),
-      0 0 60px rgba(201,162,39,0.2),
-      4px 4px 0 rgba(0,0,0,0.8);
-    margin-bottom: 10px;
-  }
-  .hero-title .line2 {
-    color: var(--text-main);
-    font-size: clamp(36px, 5vw, 64px);
-    display: block;
-    text-shadow: 2px 2px 0 rgba(0,0,0,0.8);
-  }
-  .hero-title .line3 {
-    color: var(--red);
-    font-size: clamp(28px, 3.5vw, 46px);
-    display: block;
-    letter-spacing: 6px;
-    text-shadow: 0 0 20px rgba(204,34,0,0.5), 2px 2px 0 rgba(0,0,0,0.8);
-  }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.stat-box {
+  background: var(--white);
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  padding: 8px 10px;
+}
+.stat-box .stat-lbl {
+  font-family: 'Bangers', cursive;
+  font-size: 10px;
+  color: var(--blue);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+}
+.stat-box .stat-val {
+  font-family: 'Bangers', cursive;
+  font-size: 16px;
+  color: var(--ink);
+  letter-spacing: 1px;
+  display: block;
+  line-height: 1.2;
+}
+.hero-card-footer {
+  background: var(--olive);
+  border-top: 3px solid var(--ink);
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.motto-tag {
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-shadow: 1px 1px 0 var(--ink);
+}
 
-  .hero-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0;
-  }
-  .hero-divider::before, .hero-divider::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .hero-divider-star {
-    color: var(--gold);
-    font-size: 18px;
-    text-shadow: 0 0 15px var(--gold);
-  }
+/* ══════════════════════════════
+   SECTION DIVIDER — COMIC PANEL
+══════════════════════════════ */
+.panel-divider {
+  background: var(--gold);
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px solid var(--ink);
+  padding: 14px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.panel-divider-text {
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: 6px;
+  position: relative;
+  z-index: 1;
+}
+.panel-divider::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(0,0,0,0.04) 20px, rgba(0,0,0,0.04) 21px);
+}
 
-  .hero-tagline {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--parchment);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
+/* ══════════════════════════════
+   SECTION HEADERS
+══════════════════════════════ */
+.section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.comic-section-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+.comic-section-header h2 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(44px, 6vw, 72px);
+  color: var(--ink);
+  letter-spacing: 4px;
+  text-shadow: 4px 4px 0 var(--gold), 7px 7px 0 var(--ink);
+  display: inline-block;
+  position: relative;
+}
+.comic-section-header h2::before {
+  content: attr(data-text);
+  position: absolute; inset: 0;
+  color: var(--gold);
+  transform: translate(4px,4px);
+  z-index: -1;
+}
+.eyebrow-tag {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Bangers', cursive;
+  font-size: 13px;
+  letter-spacing: 4px;
+  padding: 4px 16px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  margin-bottom: 12px;
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+.section-sub {
+  font-family: 'Special Elite', cursive;
+  font-size: 14px;
+  color: var(--blue);
+  letter-spacing: 2px;
+  margin-top: 10px;
+  display: block;
+}
 
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 35px;
-  }
-  .stat-box {
-    border: 1px solid var(--gold-dim);
-    padding: 14px 10px;
-    text-align: center;
-    background: rgba(201,162,39,0.05);
-    position: relative;
-    transition: all 0.3s;
-  }
-  .stat-box::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: -1px; right: -1px; bottom: -1px;
-    border: 1px solid transparent;
-    transition: border-color 0.3s;
-  }
-  .stat-box:hover { background: rgba(201,162,39,0.1); }
-  .stat-box:hover::before { border-color: var(--gold); box-shadow: inset 0 0 20px rgba(201,162,39,0.1); }
-  .stat-num {
-    font-family: 'Black Ops One', cursive;
-    font-size: 28px;
-    color: var(--gold);
-    text-shadow: 0 0 15px rgba(201,162,39,0.5);
-    display: block;
-  }
-  .stat-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--parchment-dark);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: block;
-    margin-top: 3px;
-  }
+/* ══════════════════════════════
+   SERVICES — COMIC PANELS
+══════════════════════════════ */
+.services-section {
+  padding: 70px 0;
+  background: var(--tan3);
+  background-image: radial-gradient(circle, rgba(26,10,0,0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 4px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+}
+.service-panel {
+  padding: 32px 28px;
+  border: 2px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+  cursor: default;
+}
+.service-panel:nth-child(1) { background: var(--blue); }
+.service-panel:nth-child(2) { background: var(--olive); }
+.service-panel:nth-child(3) { background: var(--red); }
+.service-panel:nth-child(4) { background: var(--tan2); }
+.service-panel:hover { z-index: 2; transform: scale(1.02); box-shadow: 0 0 0 3px var(--ink); }
 
-  .btn-primary {
-    display: inline-block;
-    font-family: 'Black Ops One', cursive;
-    font-size: 16px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #000;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-    padding: 16px 40px;
-    text-decoration: none;
-    position: relative;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-    transition: all 0.3s;
-    box-shadow: 0 0 30px rgba(201,162,39,0.3);
-  }
-  .btn-primary:hover {
-    box-shadow: 0 0 50px rgba(201,162,39,0.6), 0 0 100px rgba(201,162,39,0.2);
-    transform: translateY(-2px);
-  }
-  .btn-secondary {
-    display: inline-block;
-    font-family: 'Black Ops One', cursive;
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    border: 2px solid var(--gold);
-    padding: 14px 36px;
-    text-decoration: none;
-    margin-left: 16px;
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-    transition: all 0.3s;
-  }
-  .btn-secondary:hover {
-    background: rgba(201,162,39,0.1);
-    box-shadow: 0 0 20px rgba(201,162,39,0.3);
-  }
+/* Panel number */
+.panel-num {
+  position: absolute;
+  top: 10px; right: 14px;
+  font-family: 'Bangers', cursive;
+  font-size: 48px;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  pointer-events: none;
+}
+.service-panel:nth-child(4) .panel-num { color: rgba(0,0,0,0.06); }
 
-  /* Hero right — emblem placeholder */
-  .hero-emblem {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .emblem-ring {
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    border: 3px solid var(--gold-dim);
-    position: absolute;
-    animation: rotate 30s linear infinite;
-    box-shadow: 0 0 40px rgba(201,162,39,0.1), inset 0 0 40px rgba(201,162,39,0.05);
-  }
-  .emblem-ring::before {
-    content: '★ BATTLE FORGED ★ CANTON MI ★ FORGED TO WIN ★ BFC ★';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--gold-dim);
-    letter-spacing: 4px;
-  }
-  @keyframes rotate { to { transform: rotate(360deg); } }
+.service-icon-wrap {
+  width: 64px; height: 64px;
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  margin-bottom: 16px;
+  transform: rotate(-4deg);
+  transition: transform 0.2s;
+}
+.service-panel:hover .service-icon-wrap { transform: rotate(0deg) scale(1.1); }
+.service-panel:nth-child(3) .service-icon-wrap, .service-panel:nth-child(4) .service-icon-wrap {
+  background: var(--white);
+}
 
-  .emblem-inner {
-    width: 340px;
-    height: 340px;
-    background:
-      radial-gradient(circle at 40% 35%, rgba(201,162,39,0.15), transparent 60%),
-      linear-gradient(160deg, #1a1510 0%, #0a0906 100%);
-    border: 2px solid var(--gold);
-    clip-path: polygon(50% 0%, 93% 15%, 100% 55%, 80% 90%, 50% 100%, 20% 90%, 0% 55%, 7% 15%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      0 0 60px rgba(201,162,39,0.2),
-      inset 0 0 40px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 1;
-  }
-  .emblem-text {
-    text-align: center;
-  }
-  .emblem-text .big {
-    font-family: 'Black Ops One', cursive;
-    font-size: 48px;
-    color: var(--gold);
-    text-shadow: 0 0 20px rgba(201,162,39,0.6);
-    display: block;
-    line-height: 1;
-  }
-  .emblem-text .small {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 18px;
-    color: var(--parchment);
-    letter-spacing: 6px;
-    display: block;
-    margin-top: 4px;
-  }
-  .emblem-text .tagline {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--red);
-    letter-spacing: 3px;
-    display: block;
-    margin-top: 8px;
-    text-shadow: 0 0 10px var(--red);
-  }
+.service-panel h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0 var(--ink);
+  line-height: 1;
+}
+.service-panel:nth-child(1) h3, .service-panel:nth-child(2) h3 { color: var(--gold); }
+.service-panel:nth-child(3) h3 { color: var(--white); }
+.service-panel:nth-child(4) h3 { color: var(--ink); }
 
-  /* Corner brackets */
-  .emblem-corner {
-    position: absolute;
-    width: 30px; height: 30px;
-    border-color: var(--gold);
-    border-style: solid;
-    opacity: 0.6;
-  }
-  .emblem-corner.tl { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
-  .emblem-corner.tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
-  .emblem-corner.bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
-  .emblem-corner.br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+.service-panel p {
+  font-family: 'Special Elite', cursive;
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 280px;
+}
+.service-panel:nth-child(1) p, .service-panel:nth-child(2) p, .service-panel:nth-child(3) p { color: rgba(255,255,255,0.9); }
+.service-panel:nth-child(4) p { color: var(--ink); opacity: 0.8; }
 
-  /* ══════════════════════════════
-     SECTION HEADERS
-  ══════════════════════════════ */
-  .section-header {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  .section-header .eyebrow {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--crt-green);
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px var(--crt-green);
-    display: block;
-    margin-bottom: 10px;
-  }
-  .section-header h2 {
-    font-family: 'Black Ops One', cursive;
-    font-size: clamp(32px, 5vw, 56px);
-    color: var(--gold);
-    text-shadow: 0 0 30px rgba(201,162,39,0.4), 3px 3px 0 rgba(0,0,0,0.6);
-    line-height: 1;
-    margin-bottom: 14px;
-  }
-  .section-header .sub {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    color: var(--parchment-dark);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-  .section-rule {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-top: 16px;
-  }
-  .section-rule::before, .section-rule::after {
-    content: '';
-    width: 80px;
-    height: 1px;
-    background: var(--gold-dim);
-  }
-  .section-rule-icon { color: var(--gold); font-size: 14px; }
+.service-badge {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: 'Bangers', cursive;
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 4px 12px;
+  border: 2px solid;
+  box-shadow: 2px 2px 0;
+}
+.service-panel:nth-child(1) .service-badge, .service-panel:nth-child(2) .service-badge { border-color: var(--gold); box-shadow-color: var(--gold); color: var(--gold); box-shadow: 2px 2px 0 var(--gold); }
+.service-panel:nth-child(3) .service-badge { border-color: var(--white); color: var(--white); box-shadow: 2px 2px 0 rgba(255,255,255,0.5); }
+.service-panel:nth-child(4) .service-badge { border-color: var(--ink); color: var(--ink); box-shadow: 2px 2px 0 var(--ink); }
 
-  /* ══════════════════════════════
-     SERVICES
-  ══════════════════════════════ */
-  .services {
-    padding: 80px 40px;
-    background: linear-gradient(180deg, #0a0a06 0%, #0f0e0a 100%);
-    position: relative;
-  }
-  .services::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
+/* ══════════════════════════════
+   DOSSIER / ABOUT
+══════════════════════════════ */
+.dossier-section {
+  padding: 70px 0;
+  background: var(--blue2);
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px solid var(--ink);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+.dossier-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.dossier-file {
+  background: var(--tan3);
+  border: 4px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+  transform: rotate(-2deg);
+  transition: transform 0.3s;
+}
+.dossier-file:hover { transform: rotate(0deg); }
+.dossier-file-header {
+  background: var(--red);
+  border-bottom: 3px solid var(--ink);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dossier-file-header .title {
+  font-family: 'Bangers', cursive;
+  font-size: 18px;
+  color: var(--white);
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+.dossier-file-header .stamp {
+  font-family: 'Bangers', cursive;
+  font-size: 12px;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 2px 8px;
+  letter-spacing: 2px;
+  transform: rotate(3deg);
+}
+.dossier-photo-area {
+  background: var(--olive);
+  border-bottom: 3px solid var(--ink);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.dossier-photo-area::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+.dossier-char { font-size: 88px; position: relative; z-index: 1; filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.5)); }
+.dossier-photo-label {
+  position: absolute;
+  bottom: 8px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
+}
+.dossier-fields { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.dossier-field {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(26,10,0,0.2);
+  font-size: 13px;
+}
+.dossier-field .lbl {
+  font-family: 'Bangers', cursive;
+  font-size: 12px;
+  color: var(--red);
+  letter-spacing: 2px;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.dossier-field .val {
+  font-family: 'Special Elite', cursive;
+  color: var(--ink);
+  font-size: 12px;
+}
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .service-card {
-    background: linear-gradient(160deg, #181610 0%, #0d0c09 100%);
-    border: 1px solid var(--gold-dim);
-    padding: 30px 24px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-  }
-  .service-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 40px rgba(201,162,39,0.15); }
-  .service-card:hover::before { transform: scaleX(1); }
+/* DOSSIER RIGHT */
+.dossier-content h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 42px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-shadow: 4px 4px 0 var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.dossier-content .rank-tag {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Bangers', cursive;
+  font-size: 15px;
+  letter-spacing: 4px;
+  padding: 4px 14px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 0 var(--ink);
+}
+.dossier-content p {
+  font-family: 'Special Elite', cursive;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--tan2);
+  margin-bottom: 14px;
+  opacity: 0.9;
+}
 
-  .service-icon {
-    font-size: 36px;
-    margin-bottom: 14px;
-    display: block;
-    filter: drop-shadow(0 0 8px var(--gold));
-  }
-  .service-num {
-    position: absolute;
-    top: 14px;
-    right: 18px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--gold-dim);
-    letter-spacing: 1px;
-  }
-  .service-card h3 {
-    font-family: 'Black Ops One', cursive;
-    font-size: 20px;
-    color: var(--gold);
-    margin-bottom: 10px;
-    text-shadow: 0 0 15px rgba(201,162,39,0.3);
-  }
-  .service-card p {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    color: var(--parchment-dark);
-    line-height: 1.7;
-    letter-spacing: 1px;
-  }
-  .service-tag {
-    display: inline-block;
-    margin-top: 14px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--crt-green);
-    text-shadow: 0 0 8px var(--crt-green);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: 1px solid rgba(57,255,20,0.3);
-    padding: 2px 8px;
-  }
+/* SKILL BARS — COMIC STYLE */
+.skill-bars { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.skill-row { }
+.skill-row-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.skill-row-header .name {
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+.skill-row-header .pct {
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  color: var(--white);
+}
+.skill-track {
+  height: 18px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.skill-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0px, var(--gold) 12px,
+    var(--gold2) 12px, var(--gold2) 14px
+  );
+  border-right: 2px solid var(--ink);
+  animation: fillSkill 1.2s ease forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+  position: relative;
+}
+.skill-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: rgba(255,255,255,0.2);
+}
+@keyframes fillSkill { to { transform: scaleX(1); } }
 
-  /* ══════════════════════════════
-     ABOUT / OPERATOR DOSSIER
-  ══════════════════════════════ */
-  .dossier {
-    padding: 80px 40px;
-    background:
-      linear-gradient(160deg, #0d0c09 0%, #111008 100%);
-    position: relative;
-  }
-  .dossier::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  }
-  .dossier-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 60px;
-    align-items: start;
-  }
-  .dossier-card {
-    background: #0a0907;
-    border: 1px solid var(--gold-dim);
-    padding: 28px;
-    position: relative;
-  }
-  .dossier-card::before {
-    content: 'CLASSIFIED';
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    font-family: 'Black Ops One', cursive;
-    font-size: 11px;
-    color: var(--red);
-    background: #0a0907;
-    padding: 0 8px;
-    letter-spacing: 4px;
-    text-shadow: 0 0 10px var(--red);
-  }
-  .dossier-photo {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background:
-      linear-gradient(160deg, #1c1a12 0%, #0d0b08 100%);
-    border: 1px solid var(--gold-dim);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .dossier-photo::before {
-    content: '[ OPERATOR ]';
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--gold-dim);
-    letter-spacing: 4px;
-    position: absolute;
-    bottom: 10px;
-  }
-  .silhouette {
-    font-size: 100px;
-    opacity: 0.15;
-    filter: drop-shadow(0 0 20px var(--gold));
-  }
-  .dossier-field {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-  }
-  .field-label {
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    min-width: 80px;
-    flex-shrink: 0;
-  }
-  .field-value {
-    color: var(--text-main);
-    letter-spacing: 1px;
-  }
-  .dossier-content h3 {
-    font-family: 'Black Ops One', cursive;
-    font-size: 28px;
-    color: var(--gold);
-    text-shadow: 0 0 20px rgba(201,162,39,0.3);
-    margin-bottom: 6px;
-  }
-  .dossier-content .rank {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 15px;
-    color: var(--red);
-    letter-spacing: 5px;
-    display: block;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px var(--red);
-  }
-  .dossier-content p {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--parchment-dark);
-    margin-bottom: 16px;
-  }
-  .motto-box {
-    border-left: 3px solid var(--gold);
-    padding: 14px 20px;
-    background: rgba(201,162,39,0.05);
-    margin-top: 20px;
-  }
-  .motto-box .motto {
-    font-family: 'Black Ops One', cursive;
-    font-size: 22px;
-    color: var(--gold);
-    text-shadow: 0 0 15px rgba(201,162,39,0.4);
-    letter-spacing: 3px;
-  }
-  .dossier-bars {
-    margin-top: 24px;
-  }
-  .skill-bar-row {
-    margin-bottom: 12px;
-  }
-  .skill-bar-label {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--parchment-dark);
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-  }
-  .skill-bar-track {
-    height: 6px;
-    background: rgba(255,255,255,0.05);
-    position: relative;
-    border: 1px solid rgba(201,162,39,0.15);
-  }
-  .skill-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
-    box-shadow: 0 0 10px rgba(201,162,39,0.4);
-    animation: fillBar 1.5s ease forwards;
-    transform-origin: left;
-    transform: scaleX(0);
-  }
-  @keyframes fillBar { to { transform: scaleX(1); } }
+/* MOTTO BUBBLE */
+.motto-bubble {
+  background: var(--gold);
+  border: 4px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 16px 20px;
+  margin-top: 20px;
+  position: relative;
+  display: inline-block;
+}
+.motto-bubble .motto-text {
+  font-family: 'Bangers', cursive;
+  font-size: 26px;
+  color: var(--ink);
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.3);
+}
+.zap-decoration {
+  position: absolute;
+  font-size: 28px;
+  top: -18px; right: -10px;
+  animation: zap 1.5s ease-in-out infinite alternate;
+}
+@keyframes zap { from{transform:rotate(-10deg) scale(1)} to{transform:rotate(10deg) scale(1.1)} }
 
-  /* ══════════════════════════════
-     GALLERY / SHOWCASE
-  ══════════════════════════════ */
-  .gallery {
-    padding: 80px 40px;
-    background: linear-gradient(180deg, #0a0a06 0%, #0d0c09 100%);
-    position: relative;
-  }
-  .gallery::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 200px 200px;
-    gap: 12px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .gallery-item {
-    background: linear-gradient(135deg, #181510 0%, #0d0b07 100%);
-    border: 1px solid var(--gold-dim);
-    position: relative;
-    overflow: hidden;
-    cursor: crosshair;
-    transition: all 0.3s;
-  }
-  .gallery-item:nth-child(1) { grid-column: span 2; }
-  .gallery-item:nth-child(5) { grid-column: span 2; }
-  .gallery-item:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(201,162,39,0.2); }
-  .gallery-item:hover .gallery-overlay { opacity: 1; }
-  .gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(201,162,39,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    backdrop-filter: blur(2px);
-  }
-  .gallery-overlay span {
-    font-family: 'Black Ops One', cursive;
-    font-size: 14px;
-    color: var(--gold);
-    letter-spacing: 4px;
-    text-shadow: 0 0 20px var(--gold);
-    border: 1px solid var(--gold);
-    padding: 10px 20px;
-    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  }
-  .gallery-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    opacity: 0.2;
-  }
-  .gallery-placeholder .icon { font-size: 40px; }
-  .gallery-placeholder .label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+/* ══════════════════════════════
+   CONTACT — COMIC FORM
+══════════════════════════════ */
+.contact-section {
+  padding: 70px 0;
+  background: var(--tan3);
+  background-image: radial-gradient(circle, rgba(26,10,0,0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
+  border-top: 4px solid var(--ink);
+}
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.contact-form-comic {
+  background: var(--white);
+  border: 4px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+}
+.form-header-comic {
+  background: var(--blue);
+  border-bottom: 3px solid var(--ink);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.form-header-comic h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+.form-header-comic .icon { font-size: 24px; }
+.form-body { padding: 24px; }
+.form-row { margin-bottom: 16px; }
+.form-row label {
+  display: block;
+  font-family: 'Bangers', cursive;
+  font-size: 13px;
+  color: var(--red);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.form-row input, .form-row textarea, .form-row select {
+  width: 100%;
+  background: var(--tan3);
+  border: 3px solid var(--ink);
+  color: var(--ink);
+  font-family: 'Special Elite', cursive;
+  font-size: 14px;
+  padding: 10px 14px;
+  outline: none;
+  transition: box-shadow 0.15s, background 0.15s;
+  appearance: none;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+  background: var(--white);
+  box-shadow: 4px 4px 0 var(--blue);
+  border-color: var(--blue);
+}
+.form-row textarea { resize: vertical; min-height: 90px; }
+.form-row select option { background: var(--white); }
+.form-submit-comic {
+  width: 100%;
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--ink);
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 14px;
+  cursor: crosshair;
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.form-submit-comic:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
+.form-success {
+  display: none;
+  background: var(--olive);
+  border: 3px solid var(--ink);
+  padding: 20px;
+  text-align: center;
+  margin-top: 12px;
+}
+.form-success .success-title {
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 var(--ink);
+  display: block;
+}
+.form-success .success-sub {
+  font-family: 'Special Elite', cursive;
+  font-size: 13px;
+  color: var(--tan2);
+  margin-top: 6px;
+}
 
-  /* ══════════════════════════════
-     CONTACT
-  ══════════════════════════════ */
-  .contact {
-    padding: 80px 40px;
-    background: linear-gradient(180deg, #0d0c09 0%, #0a0a06 100%);
-    position: relative;
-  }
-  .contact::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .contact-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-  .contact-form {
-    background: #0a0907;
-    border: 1px solid var(--gold-dim);
-    padding: 36px;
-    position: relative;
-  }
-  .contact-form::before {
-    content: 'SEND TRANSMISSION';
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    font-family: 'Black Ops One', cursive;
-    font-size: 11px;
-    color: var(--gold);
-    background: #0a0907;
-    padding: 0 10px;
-    letter-spacing: 4px;
-  }
-  .form-row { margin-bottom: 18px; }
-  .form-row label {
-    display: block;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--gold-dim);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .form-row input, .form-row textarea, .form-row select {
-    width: 100%;
-    background: #0f0e0b;
-    border: 1px solid var(--gold-dim);
-    color: var(--text-main);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 13px;
-    padding: 10px 14px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    appearance: none;
-  }
-  .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 15px rgba(201,162,39,0.15);
-  }
-  .form-row textarea { resize: vertical; min-height: 100px; }
-  .form-row select option { background: #0f0e0b; }
-  .form-submit {
-    width: 100%;
-    font-family: 'Black Ops One', cursive;
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: #000;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-    border: none;
-    padding: 16px;
-    cursor: crosshair;
-    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-    transition: all 0.3s;
-    text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(201,162,39,0.2);
-  }
-  .form-submit:hover { box-shadow: 0 0 40px rgba(201,162,39,0.5); transform: translateY(-2px); }
+/* CONTACT INFO COMIC PANEL */
+.contact-info-comic { display: flex; flex-direction: column; gap: 16px; }
+.info-panel {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  transition: transform 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+.info-panel:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
+.info-icon-box {
+  width: 52px; height: 52px;
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.info-lbl {
+  font-family: 'Bangers', cursive;
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 2px;
+}
+.info-val {
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+  color: var(--ink);
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+.info-val small {
+  font-family: 'Special Elite', cursive;
+  font-size: 11px;
+  color: var(--blue);
+  letter-spacing: 1px;
+  display: block;
+  margin-top: 2px;
+  font-style: italic;
+}
 
-  .contact-info h3 {
-    font-family: 'Black Ops One', cursive;
-    font-size: 28px;
-    color: var(--gold);
-    text-shadow: 0 0 20px rgba(201,162,39,0.3);
-    margin-bottom: 30px;
-  }
-  .info-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid rgba(201,162,39,0.1);
-  }
-  .info-row:last-child { border-bottom: none; }
-  .info-icon {
-    font-size: 24px;
-    filter: drop-shadow(0 0 8px var(--gold));
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .info-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--gold-dim);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .info-value {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    color: var(--text-main);
-    font-weight: 600;
-    letter-spacing: 2px;
-  }
-  .info-value a { color: var(--amber); text-decoration: none; text-shadow: 0 0 10px rgba(255,153,0,0.3); }
-  .info-value a:hover { text-shadow: 0 0 20px var(--amber); }
+/* MOTTO CARD */
+.motto-card {
+  background: var(--red);
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 20px;
+  text-align: center;
+}
+.motto-card-line {
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 var(--ink);
+  display: block;
+  line-height: 1.3;
+}
+.motto-card-line:nth-child(1) { color: var(--gold); }
+.motto-card-line:nth-child(2) { color: var(--white); }
+.motto-card-line:nth-child(3) { color: var(--tan2); }
 
-  /* ══════════════════════════════
-     FOOTER
-  ══════════════════════════════ */
-  footer {
-    background: #050504;
-    border-top: 2px solid var(--gold);
-    padding: 30px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .footer-logo {
-    font-family: 'Black Ops One', cursive;
-    font-size: 20px;
-    color: var(--gold);
-    text-shadow: 0 0 15px rgba(201,162,39,0.4);
-    letter-spacing: 3px;
-  }
-  .footer-logo span { color: var(--red); }
-  .footer-tagline {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--gold-dim);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-  .footer-copy {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: rgba(122,96,48,0.6);
-    letter-spacing: 2px;
-  }
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  background: var(--ink);
+  border-top: 4px solid var(--gold);
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.foot-logo {
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.1);
+}
+.foot-logo span { color: var(--red); }
+.foot-copy {
+  font-family: 'Special Elite', cursive;
+  font-size: 12px;
+  color: rgba(255,246,232,0.4);
+  letter-spacing: 2px;
+}
+.foot-tag {
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  color: rgba(245,192,0,0.5);
+  letter-spacing: 4px;
+}
+.bottom-zigzag {
+  height: 12px;
+  background:
+    linear-gradient(135deg, var(--gold) 25%, transparent 25%) -12px 0,
+    linear-gradient(225deg, var(--gold) 25%, transparent 25%) -12px 0,
+    linear-gradient(315deg, var(--gold) 25%, transparent 25%),
+    linear-gradient(45deg, var(--gold) 25%, transparent 25%);
+  background-size: 24px 12px;
+  background-color: var(--ink);
+  border-top: 3px solid var(--ink);
+}
 
-  /* ══════════════════════════════
-     BOTTOM TAPE
-  ══════════════════════════════ */
-  .bottom-tape {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--gold) 0px, var(--gold) 20px,
-      #1a1a1a 20px, #1a1a1a 40px
-    );
-    height: 8px;
-  }
+/* ══════════════════════════════
+   SCROLL ANIMATIONS
+══════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ══════════════════════════════
-     TICKER
-  ══════════════════════════════ */
-  .ticker {
-    background: var(--gunmetal);
-    border-top: 1px solid var(--gold-dim);
-    border-bottom: 1px solid var(--gold-dim);
-    padding: 8px 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .ticker-inner {
-    display: inline-block;
-    animation: ticker 25s linear infinite;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-shadow: 0 0 10px rgba(201,162,39,0.4);
-  }
-  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-  /* ══════════════════════════════
-     ANIMATIONS
-  ══════════════════════════════ */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.8s ease forwards;
-  }
-  @keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-in:nth-child(1) { animation-delay: 0.1s; }
-  .fade-in:nth-child(2) { animation-delay: 0.2s; }
-  .fade-in:nth-child(3) { animation-delay: 0.3s; }
-  .fade-in:nth-child(4) { animation-delay: 0.4s; }
-
-  /* Glitch effect on title */
-  .glitch {
-    position: relative;
-  }
-  .glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    opacity: 0.7;
-  }
-  .glitch::before {
-    color: var(--red);
-    animation: glitch1 3s infinite;
-    clip-path: polygon(0 25%, 100% 25%, 100% 50%, 0 50%);
-  }
-  .glitch::after {
-    color: #4af;
-    animation: glitch2 3s infinite;
-    clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%);
-  }
-  @keyframes glitch1 {
-    0%, 89%, 100% { transform: none; opacity: 0; }
-    90% { transform: translateX(-3px); opacity: 0.7; }
-    92% { transform: translateX(3px); opacity: 0.7; }
-    94% { transform: none; opacity: 0; }
-  }
-  @keyframes glitch2 {
-    0%, 91%, 100% { transform: none; opacity: 0; }
-    92% { transform: translateX(3px); opacity: 0.7; }
-    94% { transform: translateX(-3px); opacity: 0.7; }
-    96% { transform: none; opacity: 0; }
-  }
-
-  /* ══════════════════════════════
-     RESPONSIVE
-  ══════════════════════════════ */
-  @media (max-width: 768px) {
-    .hero-content { grid-template-columns: 1fr; }
-    .hero-emblem { display: none; }
-    .dossier-inner { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gallery-item:nth-child(1),
-    .gallery-item:nth-child(5) { grid-column: span 1; }
-    .contact-inner { grid-template-columns: 1fr; }
-    nav { padding: 12px 20px; }
-    .nav-links { display: none; }
-  }
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-card { transform: rotate(0); margin-top: 20px; }
+  .dossier-layout { grid-template-columns: 1fr; }
+  .dossier-file { transform: rotate(0); }
+  .services-grid { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  nav { padding: 0 16px; }
+  .nav-links { display: none; }
+  .section-wrap { padding: 0 20px; }
+}
 </style>
 </head>
 <body>
-<div class="noise"></div>
 
-<!-- CLASSIFIED TAPE -->
-<div class="classified-tape">
-  <span>★ TOP SECRET ★ AUTHORIZED PERSONNEL ONLY ★</span>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <span class="ticker-inner">
-    ★ BATTLE FORGED CUSTOMS — CANTON, MI ★ VETERAN OWNED & OPERATED ★ CUSTOM BUILDS ★ PRECISION TUNING ★ CERAKOTE FINISHING ★ FIBER LASER ENGRAVING ★ CALL 313-605-7087 ★ FORGED TO WIN ★ BFC FOUGHT • FORGED IN BATTLE • BORN TO BUILD ★ BATTLE FORGED CUSTOMS — CANTON, MI ★ VETERAN OWNED & OPERATED ★ CUSTOM BUILDS ★ PRECISION TUNING ★ CERAKOTE FINISHING ★ FIBER LASER ENGRAVING ★ CALL 313-605-7087 ★ FORGED TO WIN ★ BFC FOUGHT • FORGED IN BATTLE • BORN TO BUILD ★
+<!-- TOP TAPE -->
+<div class="top-tape">
+  <span class="tape-inner">
+    ★ BATTLE FORGED CUSTOMS — CANTON, MI ★ VETERAN OWNED ★ CUSTOM BUILDS ★ CERAKOTE ★ LASER ENGRAVING ★ PRECISION TUNING ★ 313-605-7087 ★ FORGED TO WIN ★ BFC FOUGHT · FORGED IN BATTLE · BORN TO BUILD ★ BATTLE FORGED CUSTOMS — CANTON, MI ★ VETERAN OWNED ★ CUSTOM BUILDS ★ CERAKOTE ★ LASER ENGRAVING ★ PRECISION TUNING ★ 313-605-7087 ★ FORGED TO WIN ★ BFC FOUGHT · FORGED IN BATTLE · BORN TO BUILD ★&nbsp;
   </span>
 </div>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">BATTLE<span>FORGED</span></a>
+  <a class="nav-logo-wrap" href="#">
+    <div class="nav-logo-icon">🎯</div>
+    <div class="nav-logo-text">BATTLE<span>FORGED</span></div>
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#about">Operator</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">The Gunsmith</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="nav-phone">📞 313-605-7087</div>
+  <div class="nav-cta-wrap">
+    <a href="#contact" class="nav-cta">🔫 GET A QUOTE</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+  <div class="hero-halftone"></div>
+  <div class="action-burst"></div>
   <div class="hero-content">
     <div>
-      <span class="hero-badge">▶ ONLINE // OPERATIONAL</span>
-      <h1 class="hero-title glitch" data-text="BATTLE">
-        BATTLE
+      <div class="hero-eyebrow">★ VETERAN OWNED · CANTON, MI ★</div>
+      <h1 class="hero-title">
+        <span class="line1">BATTLE</span>
         <span class="line2">FORGED</span>
         <span class="line3">CUSTOMS</span>
       </h1>
-      <div class="hero-divider">
-        <span class="hero-divider-star">★</span>
+      <div class="speech-bubble">
+        <p><strong>CHUCK BATTLE</strong> — Veteran gunsmith and precision craftsman.<br>
+        Custom builds, Cerakote finishing, and fiber laser engraving done right the first time.</p>
       </div>
-      <p class="hero-tagline">
-        Veteran Firearm Customization &amp; Gunsmithing<br>
-        Canton, MI — Precision. Power. Perfection.
-      </p>
-      <div class="hero-stats">
-        <div class="stat-box fade-in">
-          <span class="stat-num">100%</span>
-          <span class="stat-label">Veteran</span>
-        </div>
-        <div class="stat-box fade-in">
-          <span class="stat-num">★★★</span>
-          <span class="stat-label">5-Star Rated</span>
-        </div>
-        <div class="stat-box fade-in">
-          <span class="stat-num">MI</span>
-          <span class="stat-label">Canton Based</span>
-        </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-comic btn-gold-comic">🎯 GET A QUOTE</a>
+        <a href="tel:3136057087" class="btn-comic btn-white-comic">📞 313-605-7087</a>
+        <a href="#services" class="btn-comic btn-red-comic">VIEW SERVICES</a>
       </div>
-      <a href="#contact" class="btn-primary">Deploy Now</a>
-      <a href="#services" class="btn-secondary">Loadout</a>
     </div>
 
-    <div class="hero-emblem">
-      <div class="emblem-ring"></div>
-      <div style="position:relative">
-        <div class="emblem-corner tl"></div>
-        <div class="emblem-corner tr"></div>
-        <div class="emblem-corner bl"></div>
-        <div class="emblem-corner br"></div>
-        <div class="emblem-inner">
-          <div class="emblem-text">
-            <span class="big">BFC</span>
-            <span class="small">BATTLE FORGED</span>
-            <span class="tagline">★ FORGED TO WIN ★</span>
+    <!-- CHARACTER CARD -->
+    <div class="hero-card ink-box-lg">
+      <div class="hero-card-header">
+        <span class="label">OPERATOR FILE</span>
+        <span class="classified">TOP SECRET</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="character-silhouette">
+          <div class="char-action-lines"></div>
+          <div class="char-big">🪖</div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <span class="stat-lbl">Code Name</span>
+            <span class="stat-val">CHUCK BATTLE</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-lbl">Location</span>
+            <span class="stat-val">CANTON, MI</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-lbl">Primary</span>
+            <span class="stat-val">CUSTOM BUILDS</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-lbl">Secondary</span>
+            <span class="stat-val">LASER ENGRAVING</span>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="section-header">
-    <span class="eyebrow">▶ MISSION CAPABILITIES</span>
-    <h2>FULL ARMORY SERVICES</h2>
-    <p class="sub">Precision. Craftsmanship. Every. Single. Build.</p>
-    <div class="section-rule"><span class="section-rule-icon">✦</span></div>
-  </div>
-  <div class="services-grid">
-    <div class="service-card">
-      <span class="service-num">01//</span>
-      <span class="service-icon">🔫</span>
-      <h3>Custom Builds</h3>
-      <p>From ground up firearms builds to complete platform overhauls. Your vision, our precision execution.</p>
-      <span class="service-tag">▶ PRIMARY SPEC</span>
-    </div>
-    <div class="service-card">
-      <span class="service-num">02//</span>
-      <span class="service-icon">⚙️</span>
-      <h3>Precision Tuning</h3>
-      <p>Trigger jobs, barrel work, action polishing. Optimize performance for competition or duty use.</p>
-      <span class="service-tag">▶ PERFORMANCE</span>
-    </div>
-    <div class="service-card">
-      <span class="service-num">03//</span>
-      <span class="service-icon">🎨</span>
-      <h3>Cerakote Finishing</h3>
-      <p>Military-grade ceramic polymer coatings in any color or pattern. Built to outlast the mission.</p>
-      <span class="service-tag">▶ COATING</span>
-    </div>
-    <div class="service-card">
-      <span class="service-num">04//</span>
-      <span class="service-icon">🔆</span>
-      <h3>Fiber Laser Engraving</h3>
-      <p>Permanent, high-precision laser engraving for custom markings, serialization, and personalization.</p>
-      <span class="service-tag">▶ SECONDARY SPEC</span>
-    </div>
-  </div>
-</section>
-
-<!-- DOSSIER / ABOUT -->
-<section class="dossier" id="about">
-  <div class="section-header">
-    <span class="eyebrow">▶ OPERATOR FILE</span>
-    <h2>THE GUNSMITH</h2>
-    <p class="sub">Code Name: Chuck Battle — Canton, MI</p>
-    <div class="section-rule"><span class="section-rule-icon">✦</span></div>
-  </div>
-  <div class="dossier-inner">
-    <div class="dossier-card">
-      <div class="dossier-photo">
-        <div class="silhouette">🪖</div>
-      </div>
-      <div class="dossier-field">
-        <span class="field-label">CODE NAME</span>
-        <span class="field-value">CHUCK BATTLE</span>
-      </div>
-      <div class="dossier-field">
-        <span class="field-label">LOCATION</span>
-        <span class="field-value">CANTON, MI</span>
-      </div>
-      <div class="dossier-field">
-        <span class="field-label">STATUS</span>
-        <span class="field-value" style="color:var(--crt-green);text-shadow:0 0 8px var(--crt-green)">■ ACTIVE</span>
-      </div>
-      <div class="dossier-field">
-        <span class="field-label">CONTACT</span>
-        <span class="field-value">313-605-7087</span>
-      </div>
-      <div class="dossier-field">
-        <span class="field-label">CLEARANCE</span>
-        <span class="field-value" style="color:var(--red)">TOP SECRET</span>
-      </div>
-    </div>
-
-    <div class="dossier-content">
-      <h3>BATTLE FORGED CUSTOMS</h3>
-      <span class="rank">★ VETERAN GUNSMITH ★ PRECISION CRAFTSMAN ★</span>
-      <p>
-        Born from service, forged in discipline. Battle Forged Customs is the culmination of years of military training and a lifelong passion for precision craftsmanship. Every firearm that passes through these doors is treated as mission-critical equipment.
-      </p>
-      <p>
-        Based in Canton, Michigan, BFC specializes in taking your firearm from factory standard to mission-ready. Whether you need a custom competition build, a duty weapon overhaul, or a one-of-a-kind laser-engraved showpiece — this is your armory.
-      </p>
-      <div class="motto-box">
-        <span class="motto">"FORGED TO WIN!"</span>
-      </div>
-      <div class="dossier-bars">
-        <div class="skill-bar-row">
-          <div class="skill-bar-label"><span>Custom Builds</span><span>100%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:100%;animation-delay:0.2s"></div></div>
-        </div>
-        <div class="skill-bar-row">
-          <div class="skill-bar-label"><span>Cerakote Application</span><span>98%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:98%;animation-delay:0.4s"></div></div>
-        </div>
-        <div class="skill-bar-row">
-          <div class="skill-bar-label"><span>Laser Engraving</span><span>100%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:100%;animation-delay:0.6s"></div></div>
-        </div>
-        <div class="skill-bar-row">
-          <div class="skill-bar-label"><span>Precision Tuning</span><span>95%</span></div>
-          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%;animation-delay:0.8s"></div></div>
-        </div>
+      <div class="hero-card-footer">
+        <span class="motto-tag">★ FORGED TO WIN ★</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <div class="section-header">
-    <span class="eyebrow">▶ FIELD INTELLIGENCE</span>
-    <h2>THE ARMORY</h2>
-    <p class="sub">Recent Builds & Custom Work</p>
-    <div class="section-rule"><span class="section-rule-icon">✦</span></div>
-  </div>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="gallery-placeholder">
-        <div class="icon">🔫</div>
-        <div class="label">Custom AR Build</div>
-      </div>
-      <div class="gallery-overlay"><span>VIEW BUILD</span></div>
-    </div>
-    <div class="gallery-item">
-      <div class="gallery-placeholder">
-        <div class="icon">🎨</div>
-        <div class="label">Cerakote Finish</div>
-      </div>
-      <div class="gallery-overlay"><span>VIEW BUILD</span></div>
-    </div>
-    <div class="gallery-item">
-      <div class="gallery-placeholder">
-        <div class="icon">🔆</div>
-        <div class="label">Laser Engraving</div>
-      </div>
-      <div class="gallery-overlay"><span>VIEW WORK</span></div>
-    </div>
-    <div class="gallery-item">
-      <div class="gallery-placeholder">
-        <div class="icon">⚙️</div>
-        <div class="label">Precision Tune</div>
-      </div>
-      <div class="gallery-overlay"><span>VIEW BUILD</span></div>
-    </div>
-    <div class="gallery-item">
-      <div class="gallery-placeholder">
-        <div class="icon">🛡️</div>
-        <div class="label">Completed Builds</div>
-      </div>
-      <div class="gallery-overlay"><span>VIEW GALLERY</span></div>
-    </div>
-  </div>
-</section>
+<!-- PANEL DIVIDER -->
+<div class="panel-divider">
+  <span class="panel-divider-text">★★★ PRECISION · POWER · PERFECTION ★★★</span>
+</div>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-header">
-    <span class="eyebrow">▶ OPEN CHANNEL</span>
-    <h2>CONTACT OPS</h2>
-    <p class="sub">Initiate Contact — Get Your Build Started</p>
-    <div class="section-rule"><span class="section-rule-icon">✦</span></div>
-  </div>
-  <div class="contact-inner">
-    <div class="contact-form">
-      <div class="form-row">
-        <label>// Name — Designation</label>
-        <input type="text" placeholder="ENTER CALLSIGN">
-      </div>
-      <div class="form-row">
-        <label>// Phone — Comms Freq</label>
-        <input type="tel" placeholder="XXX-XXX-XXXX">
-      </div>
-      <div class="form-row">
-        <label>// Email — Digital Channel</label>
-        <input type="email" placeholder="OPERATOR@DOMAIN.COM">
-      </div>
-      <div class="form-row">
-        <label>// Mission Type</label>
-        <select>
-          <option value="">SELECT SERVICE...</option>
-          <option>Custom Build</option>
-          <option>Precision Tuning</option>
-          <option>Cerakote Finish</option>
-          <option>Laser Engraving</option>
-          <option>Full Overhaul</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>// Intel — Describe Your Mission</label>
-        <textarea placeholder="DESCRIBE YOUR BUILD REQUIREMENTS..."></textarea>
-      </div>
-      <button class="form-submit">▶ TRANSMIT REQUEST</button>
+<!-- ════════ SERVICES ════════ -->
+<section class="services-section" id="services">
+  <div class="section-wrap">
+    <div class="comic-section-header reveal">
+      <div class="eyebrow-tag">MISSION CAPABILITIES</div>
+      <h2>FULL ARMORY</h2>
+      <span class="section-sub">Every service. Every build. Done right.</span>
     </div>
-
-    <div class="contact-info">
-      <h3>FIELD HQ</h3>
-      <div class="info-row">
-        <div class="info-icon">📞</div>
-        <div>
-          <span class="info-label">// Phone</span>
-          <span class="info-value"><a href="tel:3136057087">313-605-7087</a></span>
-        </div>
+    <div class="services-grid reveal">
+      <div class="service-panel">
+        <div class="panel-num">01</div>
+        <div class="service-icon-wrap">🔫</div>
+        <h3>Custom Builds</h3>
+        <p>From ground-up firearm builds to complete platform overhauls. Your vision executed with military precision.</p>
+        <span class="service-badge">★ PRIMARY SPECIALTY</span>
       </div>
-      <div class="info-row">
-        <div class="info-icon">📧</div>
-        <div>
-          <span class="info-label">// Email</span>
-          <span class="info-value"><a href="/cdn-cgi/l/email-protection#f1929984929aae939085859d94b18890999e9edf929e9c"><span class="__cf_email__" data-cfemail="a6c5ced3c5cdf9c4c7d2d2cac3e6dfc7cec9c988c5c9cb">[email&#160;protected]</span></a></span>
-        </div>
+      <div class="service-panel">
+        <div class="panel-num">02</div>
+        <div class="service-icon-wrap">⚙️</div>
+        <h3>Precision Tuning</h3>
+        <p>Trigger jobs, barrel work, action polishing. Competition or duty — optimized for your mission.</p>
+        <span class="service-badge">★ PERFORMANCE OPS</span>
       </div>
-      <div class="info-row">
-        <div class="info-icon">📍</div>
-        <div>
-          <span class="info-label">// Base of Operations</span>
-          <span class="info-value">Canton, Michigan</span>
-        </div>
+      <div class="service-panel">
+        <div class="panel-num">03</div>
+        <div class="service-icon-wrap">🎨</div>
+        <h3>Cerakote Finishing</h3>
+        <p>Military-grade ceramic polymer coating in any color or pattern. Built tough, looks lethal.</p>
+        <span class="service-badge">★ COATING DIVISION</span>
       </div>
-      <div class="info-row">
-        <div class="info-icon">⭐</div>
-        <div>
-          <span class="info-label">// Unit Status</span>
-          <span class="info-value" style="color:var(--crt-green);text-shadow:0 0 10px var(--crt-green)">Veteran Owned</span>
-        </div>
-      </div>
-      <div style="margin-top:30px;padding:20px;border:1px solid var(--gold-dim);background:rgba(201,162,39,0.04)">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--gold-dim);letter-spacing:3px;margin-bottom:10px">// BATTLE STANDARD</div>
-        <div style="font-family:'Black Ops One',cursive;font-size:18px;color:var(--gold);text-shadow:0 0 15px rgba(201,162,39,0.4);letter-spacing:2px">BFC FOUGHT</div>
-        <div style="font-family:'Black Ops One',cursive;font-size:18px;color:var(--parchment);letter-spacing:2px">FORGED IN BATTLE</div>
-        <div style="font-family:'Black Ops One',cursive;font-size:18px;color:var(--red);text-shadow:0 0 10px var(--red);letter-spacing:2px">BORN TO BUILD</div>
+      <div class="service-panel">
+        <div class="panel-num">04</div>
+        <div class="service-icon-wrap">🔆</div>
+        <h3>Laser Engraving</h3>
+        <p>Fiber laser precision for custom markings, serialization, logos, and personalization that lasts forever.</p>
+        <span class="service-badge">★ SECONDARY SPECIALTY</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- PANEL DIVIDER -->
+<div class="panel-divider" style="background:var(--red);border-color:var(--ink)">
+  <span class="panel-divider-text" style="color:var(--white);text-shadow:2px 2px 0 var(--ink)">BFC FOUGHT · FORGED IN BATTLE · BORN TO BUILD</span>
+</div>
+
+<!-- ════════ DOSSIER ════════ -->
+<section class="dossier-section" id="about">
+  <div class="section-wrap">
+    <div class="comic-section-header reveal">
+      <div class="eyebrow-tag" style="background:var(--gold);color:var(--ink)">OPERATOR DOSSIER</div>
+      <h2 style="color:var(--white);text-shadow:4px 4px 0 var(--gold),7px 7px 0 rgba(0,0,0,0.4)">THE GUNSMITH</h2>
+      <span class="section-sub" style="color:var(--tan)">Code Name: Chuck Battle — Canton, Michigan</span>
+    </div>
+    <div class="dossier-layout">
+      <!-- FILE CARD -->
+      <div class="dossier-file reveal">
+        <div class="dossier-file-header">
+          <span class="title">CLASSIFIED</span>
+          <span class="stamp">TOP SECRET</span>
+        </div>
+        <div class="dossier-photo-area">
+          <div class="dossier-char">🪖</div>
+          <div class="dossier-photo-label">[ OPERATOR PHOTO ]</div>
+        </div>
+        <div class="dossier-fields">
+          <div class="dossier-field">
+            <span class="lbl">CODE NAME</span>
+            <span class="val">CHUCK BATTLE</span>
+          </div>
+          <div class="dossier-field">
+            <span class="lbl">STATUS</span>
+            <span class="val" style="color:var(--olive2);font-weight:bold">■ ACTIVE</span>
+          </div>
+          <div class="dossier-field">
+            <span class="lbl">BASE</span>
+            <span class="val">CANTON, MICHIGAN</span>
+          </div>
+          <div class="dossier-field">
+            <span class="lbl">PHONE</span>
+            <span class="val">313-605-7087</span>
+          </div>
+          <div class="dossier-field">
+            <span class="lbl">EMAIL</span>
+            <span class="val">chuck_battle@yahoo.com</span>
+          </div>
+          <div class="dossier-field">
+            <span class="lbl">UNIT</span>
+            <span class="val">BATTLE FORGED CUSTOMS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="dossier-content reveal">
+        <h3>BATTLE FORGED CUSTOMS</h3>
+        <span class="rank-tag">★ VETERAN GUNSMITH ★ PRECISION CRAFTSMAN ★</span>
+        <p>Born from service, forged in discipline. Battle Forged Customs is the culmination of years of military training and a lifelong passion for precision craftsmanship. Every firearm that passes through these doors is treated as mission-critical equipment.</p>
+        <p>Based in Canton, Michigan, BFC specializes in taking your firearm from factory standard to mission-ready. Whether you need a custom competition build, a duty weapon overhaul, or a one-of-a-kind engraved showpiece — this is your armory.</p>
+
+        <div class="skill-bars">
+          <div class="skill-row">
+            <div class="skill-row-header"><span class="name">CUSTOM BUILDS</span><span class="pct">100%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width:100%;animation-delay:0.1s"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-header"><span class="name">CERAKOTE FINISHING</span><span class="pct">98%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width:98%;animation-delay:0.25s"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-header"><span class="name">LASER ENGRAVING</span><span class="pct">100%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width:100%;animation-delay:0.4s"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-header"><span class="name">PRECISION TUNING</span><span class="pct">95%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width:95%;animation-delay:0.55s"></div></div>
+          </div>
+        </div>
+
+        <div class="motto-bubble">
+          <span class="motto-text">"FORGED TO WIN!"</span>
+          <span class="zap-decoration">⚡</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL DIVIDER -->
+<div class="panel-divider">
+  <span class="panel-divider-text">★★★ INITIATE CONTACT — GET YOUR BUILD STARTED ★★★</span>
+</div>
+
+<!-- ════════ CONTACT ════════ -->
+<section class="contact-section" id="contact">
+  <div class="section-wrap">
+    <div class="comic-section-header reveal">
+      <div class="eyebrow-tag">OPEN CHANNEL</div>
+      <h2>CONTACT OPS</h2>
+      <span class="section-sub">Send a transmission · Chuck will respond fast</span>
+    </div>
+    <div class="contact-layout">
+      <!-- FORM -->
+      <div class="contact-form-comic reveal">
+        <div class="form-header-comic">
+          <span class="icon">📡</span>
+          <h3>SEND TRANSMISSION</h3>
+        </div>
+        <div class="form-body">
+          <form id="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <label>// Your Name</label>
+              <input type="text" name="name" placeholder="Enter your callsign..." required>
+            </div>
+            <div class="form-row">
+              <label>// Phone</label>
+              <input type="tel" name="phone" placeholder="313-XXX-XXXX">
+            </div>
+            <div class="form-row">
+              <label>// Email</label>
+              <input type="email" name="email" placeholder="operator@domain.com" required>
+            </div>
+            <div class="form-row">
+              <label>// Service Needed</label>
+              <select name="service">
+                <option value="">Select mission type...</option>
+                <option>Custom Build</option>
+                <option>Cerakote Finish</option>
+                <option>Laser Engraving</option>
+                <option>Precision Tuning</option>
+                <option>Full Overhaul</option>
+                <option>Other / Consultation</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>// Mission Brief</label>
+              <textarea name="message" placeholder="Describe your build or project..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit-comic">
+              <span>🎯</span> FIRE TRANSMISSION
+            </button>
+          </form>
+          <div class="form-success" id="form-success">
+            <span class="success-title">💥 TRANSMISSION SENT!</span>
+            <p class="success-sub">Chuck Battle will be in contact soon.<br>You can also reach him directly at 313-605-7087.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div class="contact-info-comic reveal">
+        <a href="tel:3136057087" class="info-panel">
+          <div class="info-icon-box">📞</div>
+          <div>
+            <span class="info-lbl">// PHONE</span>
+            <span class="info-val">313-605-7087<small>Call or text anytime</small></span>
+          </div>
+        </a>
+        <a href="mailto:chuck_battle@yahoo.com" class="info-panel">
+          <div class="info-icon-box">📧</div>
+          <div>
+            <span class="info-lbl">// EMAIL</span>
+            <span class="info-val">chuck_battle@yahoo.com<small>Include photos of your firearm</small></span>
+          </div>
+        </a>
+        <div class="info-panel" style="cursor:default">
+          <div class="info-icon-box">📍</div>
+          <div>
+            <span class="info-lbl">// LOCATION</span>
+            <span class="info-val">Canton, Michigan<small>Southeast Michigan area</small></span>
+          </div>
+        </div>
+        <div class="info-panel" style="cursor:default">
+          <div class="info-icon-box">⭐</div>
+          <div>
+            <span class="info-lbl">// UNIT</span>
+            <span class="info-val" style="color:var(--olive2)">Veteran Owned<small>Battle Forged Customs LLC</small></span>
+          </div>
+        </div>
+        <div class="motto-card">
+          <span class="motto-card-line">BFC FOUGHT</span>
+          <span class="motto-card-line">FORGED IN BATTLE</span>
+          <span class="motto-card-line">BORN TO BUILD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-logo">BATTLE<span>FORGED</span> CUSTOMS</div>
-  <div class="footer-tagline">★ FORGED TO WIN ★ CANTON, MI ★</div>
-  <div class="footer-copy">© 2024 BATTLE FORGED CUSTOMS // ALL RIGHTS RESERVED</div>
+  <div class="foot-logo">BATTLE<span>FORGED</span> CUSTOMS</div>
+  <div class="foot-tag">★ FORGED TO WIN ★ CANTON, MI ★</div>
+  <div class="foot-copy">© 2025 BATTLE FORGED CUSTOMS · ALL RIGHTS RESERVED</div>
 </footer>
-<div class="bottom-tape"></div>
+<div class="bottom-zigzag"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
-    });
+<script>
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 80);
+      revealObserver.unobserve(e.target);
+    }
   });
+}, { threshold: 0.1 });
+reveals.forEach(el => revealObserver.observe(el));
 
-  // Animate skill bars on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
-          bar
+// ── CONTACT FORM — Formspree ──
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.form-submit-comic');
+  btn.textContent = '📡 TRANSMITTING...';
+  btn.disabled = true;
+
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/chuck_battle@yahoo.com', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else {
+      // Fallback: open mailto
+      const name = data.get('name');
+      const email = data.get('email');
+      const phone = data.get('phone') || 'N/A';
+      const service = data.get('service') || 'N/A';
+      const message = data.get('message');
+      const subject = encodeURIComponent(`Build Request from ${name} — ${service}`);
+      const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:chuck_battle@yahoo.com?subject=${subject}&body=${body}`;
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }
+  } catch(err) {
+    // Fallback mailto
+    const name = data.get('name') || '';
+    const phone = data.get('phone') || '';
+    const service = data.get('service') || '';
+    const message = data.get('message') || '';
+    const subject = encodeURIComponent(`Build Request — ${service}`);
+    const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:chuck_battle@yahoo.com?subject=${subject}&body=${body}`;
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
