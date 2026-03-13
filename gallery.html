@@ -251,22 +251,26 @@ nav {
 .build-card[data-cat="shotgun"] .build-card-bar { background: var(--dark-green); }
 .build-card[data-cat="precision"] .build-card-bar { background: #6a3a8f; }
 
-/* Photo area */
+/* Photo area — uniform 4:3 crop */
 .build-photo {
   position: relative; overflow: hidden;
   background: linear-gradient(160deg, #1a1a0e, #0d0c08);
+  aspect-ratio: 4 / 3;
+  cursor: crosshair;
 }
 .build-photo img {
-  width: 100%; display: block;
-  transition: transform 0.3s;
+  width: 100%; height: 100%;
+  display: block; object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s ease;
 }
-.build-card:hover .build-photo img { transform: scale(1.04); }
+.build-card:hover .build-photo img { transform: scale(1.06); }
 /* Placeholder when no photo */
 .build-photo-placeholder {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 10px; padding: 40px 20px;
-  min-height: 200px;
+  height: 100%;
 }
 .build-photo-placeholder .ph-icon { font-size: 56px; opacity: 0.12; }
 .build-photo-placeholder .ph-label {
@@ -373,7 +377,7 @@ nav {
   transform: scale(0.93) rotate(-1deg);
   transition: transform 0.25s;
 }
-.lightbox.open .lightbox-box { transform: scale(1) rotate(0deg); }
+.lightbox.open .lightbox-box { transform: scale(1); }
 
 /* LB Header */
 .lb-header {
@@ -396,20 +400,79 @@ nav {
 }
 .lb-close:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
 
-/* LB Image */
+/* LB Carousel */
 .lb-img-zone {
   background: linear-gradient(160deg, #1a1a0e, #0a0906);
-  min-height: 360px; display: flex;
-  align-items: center; justify-content: center;
+  aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
   border-bottom: 3px solid var(--ink);
 }
 .lb-img-zone::before {
   content: ''; position: absolute; inset: 0;
   background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 10px 10px;
+  background-size: 10px 10px; z-index: 0;
 }
-.lb-img-zone img { width: 100%; max-height: 460px; object-fit: contain; position: relative; z-index: 1; }
+/* Carousel slides container */
+.lb-carousel {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.lb-carousel-track {
+  display: flex; width: 100%; height: 100%;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.lb-slide {
+  min-width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.lb-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.lb-slide .lb-placeholder-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+/* Arrow buttons */
+.lb-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 10; background: var(--ink); border: 3px solid var(--gold-light);
+  color: var(--gold-light); font-family: 'Bangers', cursive;
+  font-size: 22px; letter-spacing: 1px;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: crosshair; box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+  transition: background 0.15s, transform 0.1s;
+  user-select: none;
+}
+.lb-arrow:hover { background: var(--od-green); transform: translateY(-50%) scale(1.08); }
+.lb-arrow:active { transform: translateY(-50%) scale(0.95); }
+.lb-arrow-prev { left: 16px; }
+.lb-arrow-next { right: 16px; }
+/* Counter pill */
+.lb-counter {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  z-index: 10; background: rgba(10,8,4,0.82); border: 2px solid var(--gold);
+  font-family: 'Bangers', cursive; font-size: 13px; letter-spacing: 3px;
+  color: var(--gold-light); padding: 3px 14px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+  white-space: nowrap;
+}
+/* Dot indicators */
+.lb-dots {
+  position: absolute; bottom: 12px; right: 16px;
+  z-index: 10; display: flex; gap: 5px; align-items: center;
+}
+.lb-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(245,200,66,0.3); border: 1px solid var(--gold);
+  transition: background 0.2s, transform 0.2s; cursor: pointer;
+}
+.lb-dot.active { background: var(--gold-light); transform: scale(1.3); }
 .lb-placeholder-wrap {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   position: relative; z-index: 1;
@@ -425,21 +488,7 @@ nav {
   color: var(--tan); letter-spacing: 4px; text-align: center;
 }
 
-/* LB Nav */
-.lb-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  left: 0; right: 0; display: flex;
-  justify-content: space-between; padding: 0 12px; z-index: 2; pointer-events: none;
-}
-.lb-nav-btn {
-  font-family: 'Bangers', cursive; font-size: 22px;
-  color: var(--gold-light); background: rgba(10,8,4,0.7);
-  border: 2px solid var(--gold); width: 48px; height: 48px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: crosshair; pointer-events: all;
-  box-shadow: 2px 2px 0 var(--ink); transition: all 0.15s;
-}
-.lb-nav-btn:hover { background: var(--gold); color: var(--ink); }
+
 
 /* LB Details */
 .lb-details { padding: 24px 28px; }
@@ -1056,15 +1105,17 @@ footer {
       <button class="lb-close" onclick="closeLightbox()">[ CLOSE X ]</button>
     </div>
     <div class="lb-img-zone" id="lb-img-zone">
-      <div class="lb-nav">
-        <button class="lb-nav-btn" onclick="lbNav(-1)">◀</button>
-        <button class="lb-nav-btn" onclick="lbNav(1)">▶</button>
+      <!-- Carousel -->
+      <div class="lb-carousel">
+        <div class="lb-carousel-track" id="lb-track"></div>
       </div>
-      <img id="lb-photo" src="" alt="" style="width:100%;max-height:460px;object-fit:contain;position:relative;z-index:1;display:none;">
-      <div class="lb-placeholder-wrap" id="lb-placeholder">
-        <div class="lb-placeholder-name" id="lb-name">BUILD NAME</div>
-        <div class="lb-placeholder-sub" id="lb-sub">SPEC DETAILS</div>
-      </div>
+      <!-- Arrows -->
+      <button class="lb-arrow lb-arrow-prev" onclick="lbNav(-1)" title="Previous">&#9664;</button>
+      <button class="lb-arrow lb-arrow-next" onclick="lbNav(1)" title="Next">&#9654;</button>
+      <!-- Counter -->
+      <div class="lb-counter" id="lb-counter">1 / 18</div>
+      <!-- Dots -->
+      <div class="lb-dots" id="lb-dots"></div>
     </div>
     <div class="lb-details">
       <div class="lb-details-grid">
@@ -1107,40 +1158,40 @@ const builds = [
     engrave:"Vortex Scope", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-003" },
   { id:4, name:"1911 Flag Engraving", cat:"engraving", photo:"gallery/build-04.jpg", sub:"1911 Platform · Matte Black",
     platform:"1911 Platform", barrel:"Custom Grips", finish:"Matte Black", trigger:"Match",
-    engrave:"Flag + Spartan Art", optics:"Installed", muzzle:"Installed", time:"4 days", status:"COMPLETED", filenum:"BFC-004" },
+    engrave:"Flag + Spartan Art", optics:"None", muzzle:"None", time:"4 days", status:"COMPLETED", filenum:"BFC-004" },
   { id:5, name:"Gold Desert Eagle", cat:"cerakote", photo:"gallery/build-05.jpg", sub:"Desert Eagle .50AE · Gold Cerakote",
     platform:"Desert Eagle .50AE", barrel:"Mirror Accents", finish:"Gold Cerakote", trigger:"Factory",
-    engrave:"Black Grips", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-005" },
+    engrave:"Black Grips", optics:"None", muzzle:"None", time:"1 week", status:"COMPLETED", filenum:"BFC-005" },
   { id:6, name:"Orange Revolver", cat:"cerakote", photo:"gallery/build-06.jpg", sub:"S&W Revolver · Burnt Orange Cerakote",
     platform:"S&W Revolver", barrel:"Custom Color", finish:"Burnt Orange Cerakote", trigger:"Standard",
-    engrave:"Black Cylinder", optics:"Installed", muzzle:"Installed", time:"4 days", status:"COMPLETED", filenum:"BFC-006" },
+    engrave:"Black Cylinder", optics:"None", muzzle:"None", time:"4 days", status:"COMPLETED", filenum:"BFC-006" },
   { id:7, name:"Ruger Precision", cat:"precision", photo:"gallery/build-07.jpg", sub:"Ruger Precision · Matte Black",
     platform:"Ruger Precision", barrel:"Chassis + Bipod", finish:"Matte Black", trigger:"Timney",
     engrave:"Vortex Diamondback", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-007" },
   { id:8, name:"1911 Spartan Grips", cat:"engraving", photo:"gallery/build-08.jpg", sub:"1911 Platform · Matte Black",
     platform:"1911 Platform", barrel:"White Grip Engraving", finish:"Matte Black", trigger:"Match",
-    engrave:"Spartan Artwork", optics:"Installed", muzzle:"Installed", time:"5 days", status:"COMPLETED", filenum:"BFC-008" },
+    engrave:"Spartan Artwork", optics:"None", muzzle:"None", time:"5 days", status:"COMPLETED", filenum:"BFC-008" },
   { id:9, name:"1911 Patriot", cat:"engraving", photo:"gallery/build-09.jpg", sub:"1911 Platform · Matte Black",
     platform:"1911 Platform", barrel:"Laser Engraved", finish:"Matte Black", trigger:"Match",
-    engrave:"Patriot Theme", optics:"Installed", muzzle:"Installed", time:"4 days", status:"COMPLETED", filenum:"BFC-009" },
+    engrave:"Patriot Theme", optics:"None", muzzle:"None", time:"4 days", status:"COMPLETED", filenum:"BFC-009" },
   { id:10, name:"Kimber Mirror Polish", cat:"precision", photo:"gallery/build-10.jpg", sub:"Kimber 1911 · Mirror Polish",
     platform:"Kimber 1911", barrel:"Competition Trigger", finish:"Mirror Polish", trigger:"Kimber",
-    engrave:"Ornate Grips", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-010" },
+    engrave:"Ornate Grips", optics:"None", muzzle:"None", time:"1 week", status:"COMPLETED", filenum:"BFC-010" },
   { id:11, name:"M&P Two-Tone", cat:"cerakote", photo:"gallery/build-11.jpg", sub:"S&W M&P 9c · Cobalt Blue/Silver",
     platform:"S&W M&P 9c", barrel:"Carry Build", finish:"Cobalt Blue/Silver", trigger:"Enhanced",
-    engrave:"Two-Tone", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-011" },
+    engrave:"Two-Tone", optics:"None", muzzle:"None", time:"1 week", status:"COMPLETED", filenum:"BFC-011" },
   { id:12, name:"M&P Blue Carry", cat:"cerakote", photo:"gallery/build-12.jpg", sub:"S&W M&P · Cobalt Blue",
     platform:"S&W M&P", barrel:"Carry Build", finish:"Cobalt Blue", trigger:"Enhanced",
-    engrave:"Silver Slide", optics:"Installed", muzzle:"Installed", time:"5 days", status:"COMPLETED", filenum:"BFC-012" },
+    engrave:"Silver Slide", optics:"None", muzzle:"None", time:"5 days", status:"COMPLETED", filenum:"BFC-012" },
   { id:13, name:"Nintendo Zapper Glock", cat:"cerakote", photo:"gallery/build-13.jpg", sub:"Glock Platform · NES Grey/White/Red",
     platform:"Glock Platform", barrel:"Laser Engraved", finish:"NES Grey/White/Red", trigger:"Competition",
-    engrave:"Nintendo Zapper", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-013" },
+    engrave:"Nintendo Zapper", optics:"None", muzzle:"None", time:"1 week", status:"COMPLETED", filenum:"BFC-013" },
   { id:14, name:"Kimber Warrior", cat:"precision", photo:"gallery/build-14.jpg", sub:"Kimber 1911 · Dark Finish",
     platform:"Kimber 1911", barrel:"Precision Trigger", finish:"Dark Finish", trigger:"Kimber",
-    engrave:"Spartan Warrior", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-014" },
+    engrave:"Spartan Warrior", optics:"None", muzzle:"None", time:"1 week", status:"COMPLETED", filenum:"BFC-014" },
   { id:15, name:"Nintendo Zapper V2", cat:"cerakote", photo:"gallery/build-15.jpg", sub:"Glock Competition · NES Grey/Black",
     platform:"Glock Competition", barrel:"Laser Engraved", finish:"NES Grey/Black", trigger:"Competition",
-    engrave:"Purple Trigger", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-015" },
+    engrave:"Purple Trigger", optics:"None", muzzle:"None", time:"1 week", status:"COMPLETED", filenum:"BFC-015" },
   { id:16, name:"AR Pistol Build", cat:"ar15", photo:"gallery/build-16.jpg", sub:"AR Pistol · Matte Black",
     platform:"AR Pistol", barrel:"M-LOK + Sling", finish:"Matte Black", trigger:"Enhanced",
     engrave:"Vortex Optic", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-016" },
@@ -1154,6 +1205,63 @@ const builds = [
 
 let currentLbIdx = 0;
 let visibleBuilds = [...builds];
+
+// ── BUILD CAROUSEL TRACK ──────────────────────────────
+function buildCarouselTrack(buildList) {
+  const track = document.getElementById('lb-track');
+  track.innerHTML = '';
+  buildList.forEach((b, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'lb-slide';
+    if (b.photo) {
+      const img = document.createElement('img');
+      img.src = b.photo;
+      img.alt = b.name;
+      img.loading = 'lazy';
+      slide.appendChild(img);
+    } else {
+      slide.innerHTML = `<div class="lb-placeholder-wrap">
+        <div class="lb-placeholder-icon">🔫</div>
+        <div class="lb-placeholder-name">${b.name.toUpperCase()}</div>
+        <div class="lb-placeholder-sub">${b.sub.toUpperCase()}</div>
+      </div>`;
+    }
+    track.appendChild(slide);
+  });
+  buildDots(buildList);
+  updateCarouselPosition(false);
+}
+
+function buildDots(buildList) {
+  const dots = document.getElementById('lb-dots');
+  if (!dots) return;
+  // Only show dots if 12 or fewer (otherwise too many)
+  if (buildList.length > 12) { dots.innerHTML = ''; return; }
+  dots.innerHTML = buildList.map((_, i) =>
+    `<div class="lb-dot${i === currentLbIdx ? ' active' : ''}" onclick="jumpToSlide(${i})"></div>`
+  ).join('');
+}
+
+function updateCarouselPosition(animate = true) {
+  const track = document.getElementById('lb-track');
+  if (!track) return;
+  if (!animate) track.style.transition = 'none';
+  track.style.transform = `translateX(-${currentLbIdx * 100}%)`;
+  if (!animate) { track.offsetHeight; track.style.transition = ''; }
+
+  // Counter
+  const arr = visibleBuilds.length ? visibleBuilds : builds;
+  document.getElementById('lb-counter').textContent = `${currentLbIdx + 1} / ${arr.length}`;
+
+  // Dots
+  document.querySelectorAll('.lb-dot').forEach((d, i) => d.classList.toggle('active', i === currentLbIdx));
+}
+
+function jumpToSlide(i) {
+  currentLbIdx = i;
+  updateCarouselPosition(true);
+  populateLbDetails(visibleBuilds[i] || builds[i]);
+}
 
 // ── FILTER ───────────────────────────────────────────
 function filterBuilds(btn, cat) {
@@ -1170,7 +1278,7 @@ function filterBuilds(btn, cat) {
     if (match) {
       card.style.animationDelay = (shown * 0.05) + 's';
       card.style.animation = 'none';
-      card.offsetHeight; // reflow
+      card.offsetHeight;
       card.style.animation = '';
       shown++;
     }
@@ -1184,27 +1292,15 @@ function filterBuilds(btn, cat) {
 // ── LIGHTBOX ─────────────────────────────────────────
 function openLightbox(idx) {
   currentLbIdx = idx;
-  populateLb(visibleBuilds[idx] || builds[idx]);
+  const arr = visibleBuilds.length ? visibleBuilds : builds;
+  buildCarouselTrack(arr);
+  populateLbDetails(arr[idx]);
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function populateLb(b) {
+function populateLbDetails(b) {
   document.getElementById('lb-title').textContent = '// BUILD FILE: ' + b.name.toUpperCase() + ' — ' + b.filenum;
-  // Show photo if available
-  const photo = document.getElementById('lb-photo');
-  const placeholder = document.getElementById('lb-placeholder');
-  if (b.photo) {
-    photo.src = b.photo;
-    photo.alt = b.name;
-    photo.style.display = 'block';
-    placeholder.style.display = 'none';
-  } else {
-    photo.style.display = 'none';
-    placeholder.style.display = 'flex';
-  }
-  document.getElementById('lb-name').textContent = b.name.toUpperCase();
-  document.getElementById('lb-sub').textContent = b.sub.toUpperCase();
   document.getElementById('lb-platform').textContent = b.platform;
   document.getElementById('lb-barrel').textContent = b.barrel;
   document.getElementById('lb-finish').textContent = b.finish;
@@ -1220,7 +1316,8 @@ function populateLb(b) {
 function lbNav(dir) {
   const arr = visibleBuilds.length ? visibleBuilds : builds;
   currentLbIdx = (currentLbIdx + dir + arr.length) % arr.length;
-  populateLb(arr[currentLbIdx]);
+  updateCarouselPosition(true);
+  populateLbDetails(arr[currentLbIdx]);
 }
 
 function closeLightbox() {
@@ -1231,6 +1328,7 @@ function closeLbOutside(e) {
   if (e.target === document.getElementById('lightbox')) closeLightbox();
 }
 
+// Keyboard nav + swipe
 document.addEventListener('keydown', e => {
   const lb = document.getElementById('lightbox');
   if (!lb.classList.contains('open')) return;
@@ -1239,7 +1337,17 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNav(1);
 });
 
-// Wire up card hover clicks to lightbox
+// Touch / swipe support
+let touchStartX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+// Wire up card clicks
 document.querySelectorAll('.build-card').forEach((card, i) => {
   card.querySelector('.build-photo')?.addEventListener('click', () => openLightbox(i));
 });
