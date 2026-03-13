@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Gallery — Battle Forged Customs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1008;
+  --gold: #d4a017;
+  --gold-light: #f5c842;
+  --tan: #c8a96e;
+  --od-green: #4a5e2a;
+  --dark-green: #2d3a18;
+  --red: #cc2200;
+  --red-bright: #ff3300;
+  --cobalt: #1a3a8f;
+  --sky: #4a7abf;
+  --cream: #f5e6c8;
+  --parchment: #e8d5a0;
+  --dark: #0f0c07;
+  --card-bg: #1c1a12;
+  --halftone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='1.5' fill='rgba(0,0,0,0.12)'/%3E%3C/svg%3E");
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--ink);
+  font-family: 'Oswald', sans-serif;
+  overflow-x: hidden;
+  cursor: crosshair;
+  background-image: var(--halftone);
+  background-size: 8px 8px;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px);
+  pointer-events: none; z-index: 9999;
+}
+
+/* ── HAZARD TAPE ── */
+.hazard-tape {
+  background: repeating-linear-gradient(-45deg, var(--gold-light) 0px, var(--gold-light) 18px, var(--ink) 18px, var(--ink) 36px);
+  padding: 5px 0; text-align: center;
+  border-bottom: 3px solid var(--ink);
+}
+.hazard-tape span {
+  font-family: 'Bangers', cursive; font-size: 12px; color: var(--ink);
+  background: var(--gold-light); padding: 2px 20px; letter-spacing: 6px; border: 2px solid var(--ink);
+}
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--od-green); border-bottom: 3px solid var(--ink);
+  padding: 7px 0; overflow: hidden; white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-block; animation: ticker 28s linear infinite;
+  font-family: 'Bangers', cursive; font-size: 14px;
+  color: var(--gold-light); letter-spacing: 4px; text-shadow: 2px 2px 0 var(--ink);
+}
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── NAV ── */
+nav {
+  background: linear-gradient(180deg, var(--cobalt) 0%, #122a6e 100%);
+  border-bottom: 4px solid var(--ink);
+  padding: 0 40px; display: flex; align-items: stretch;
+  justify-content: space-between; position: sticky; top: 0; z-index: 500;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.nav-logo-wrap { display: flex; align-items: center; padding: 12px 0; }
+.nav-logo {
+  font-family: 'Bangers', cursive; font-size: 30px; color: var(--gold-light);
+  text-decoration: none; letter-spacing: 4px;
+  text-shadow: 3px 3px 0 var(--ink), -1px -1px 0 var(--ink);
+}
+.nav-logo .slash { color: var(--red-bright); }
+.nav-stripe { display: flex; align-items: stretch; }
+.nav-link {
+  font-family: 'Bangers', cursive; font-size: 16px; color: var(--cream);
+  text-decoration: none; letter-spacing: 3px; padding: 0 20px;
+  display: flex; align-items: center; border-left: 2px solid rgba(255,255,255,0.15);
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover { background: rgba(255,255,255,0.1); color: var(--gold-light); }
+.nav-link.active { color: var(--gold-light); background: rgba(255,255,255,0.08); }
+.nav-cta-wrap { display: flex; align-items: center; padding: 10px 0 10px 20px; border-left: 2px solid rgba(255,255,255,0.15); }
+.nav-cta {
+  font-family: 'Bangers', cursive; font-size: 16px; letter-spacing: 3px;
+  color: var(--ink); background: var(--gold-light); padding: 8px 22px;
+  text-decoration: none; border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s; display: inline-block;
+}
+.nav-cta:hover { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  background: linear-gradient(160deg, var(--cobalt) 0%, var(--dark-green) 60%, var(--od-green) 100%);
+  border-bottom: 5px solid var(--ink);
+  padding: 60px 40px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+.page-header::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px);
+}
+.page-header-inner { position: relative; z-index: 2; }
+.page-header-eyebrow {
+  font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  color: var(--gold); letter-spacing: 6px; text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+.page-header h1 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(60px, 10vw, 110px);
+  color: var(--gold-light);
+  text-shadow: 5px 5px 0 var(--ink), -2px -2px 0 var(--ink), 8px 8px 0 rgba(0,0,0,0.3);
+  letter-spacing: 6px;
+  line-height: 0.95;
+}
+.page-header h1 span { color: var(--cream); display: block; font-size: 55%; letter-spacing: 10px; }
+.page-header-sub {
+  font-family: 'Oswald', sans-serif; font-weight: 400;
+  font-size: 14px; color: var(--parchment); letter-spacing: 4px;
+  text-transform: uppercase; margin-top: 14px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}
+.header-rule {
+  display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 16px;
+}
+.header-rule::before, .header-rule::after {
+  content: ''; width: 80px; height: 3px;
+  background: var(--gold); border: 1px solid var(--ink);
+}
+.header-rule-star { font-family: 'Bangers', cursive; font-size: 20px; color: var(--red-bright); text-shadow: 2px 2px 0 var(--ink); }
+
+/* BUILD COUNTER STRIP */
+.counter-strip {
+  background: var(--cream);
+  border-bottom: 3px solid var(--ink);
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.counter-item { text-align: center; }
+.counter-num {
+  font-family: 'Bangers', cursive; font-size: 36px;
+  color: var(--ink); text-shadow: 2px 2px 0 var(--gold);
+  display: block; line-height: 1;
+}
+.counter-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 9px;
+  color: var(--od-green); letter-spacing: 3px; text-transform: uppercase; display: block;
+}
+.counter-divider { width: 3px; height: 40px; background: var(--ink); opacity: 0.2; }
+
+/* ── MAIN GALLERY ── */
+.gallery-main {
+  padding: 50px 40px 80px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  align-items: center;
+}
+.filter-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 10px;
+  color: var(--tan); letter-spacing: 4px; text-transform: uppercase;
+  margin-right: 6px;
+}
+.filter-btn {
+  font-family: 'Bangers', cursive; font-size: 15px; letter-spacing: 2px;
+  color: var(--cream); background: transparent;
+  border: 2px solid rgba(245,200,66,0.3);
+  padding: 7px 18px; cursor: crosshair;
+  transition: all 0.15s;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+.filter-btn:hover {
+  color: var(--gold-light); border-color: var(--gold-light);
+  background: rgba(245,200,66,0.08); box-shadow: 3px 3px 0 var(--ink);
+}
+.filter-btn.active {
+  color: var(--ink); background: var(--gold-light);
+  border-color: var(--ink); box-shadow: 3px 3px 0 var(--ink);
+}
+.filter-count {
+  font-family: 'Share Tech Mono', monospace; font-size: 9px;
+  color: var(--tan); letter-spacing: 2px; margin-left: auto;
+}
+
+/* MASONRY GRID */
+.build-grid {
+  columns: 3;
+  column-gap: 16px;
+}
+@media (max-width: 900px) { .build-grid { columns: 2; } }
+@media (max-width: 560px) { .build-grid { columns: 1; } }
+
+.build-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  overflow: hidden;
+  cursor: crosshair;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+  animation: cardIn 0.35s ease both;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.build-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+.build-card.hidden { display: none; }
+
+/* Card top color bar by category */
+.build-card-bar {
+  height: 6px;
+  background: var(--od-green);
+}
+.build-card[data-cat="pistol"] .build-card-bar { background: var(--cobalt); }
+.build-card[data-cat="cerakote"] .build-card-bar { background: var(--red-bright); }
+.build-card[data-cat="engraving"] .build-card-bar { background: var(--gold); }
+.build-card[data-cat="shotgun"] .build-card-bar { background: var(--dark-green); }
+.build-card[data-cat="precision"] .build-card-bar { background: #6a3a8f; }
+
+/* Photo area */
+.build-photo {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #1a1a0e, #0d0c08);
+}
+.build-photo img {
+  width: 100%; display: block;
+  transition: transform 0.3s;
+}
+.build-card:hover .build-photo img { transform: scale(1.04); }
+/* Placeholder when no photo */
+.build-photo-placeholder {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; padding: 40px 20px;
+  min-height: 200px;
+}
+.build-photo-placeholder .ph-icon { font-size: 56px; opacity: 0.12; }
+.build-photo-placeholder .ph-label {
+  font-family: 'Bangers', cursive; font-size: 13px;
+  color: rgba(245,200,66,0.25); letter-spacing: 4px;
+}
+/* Hover overlay */
+.build-photo-overlay {
+  position: absolute; inset: 0;
+  background: rgba(74,94,42,0.88);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  opacity: 0; transition: opacity 0.2s;
+  border: 3px solid var(--gold-light);
+}
+.build-card:hover .build-photo-overlay { opacity: 1; }
+.overlay-title {
+  font-family: 'Bangers', cursive; font-size: 22px;
+  color: var(--gold-light); letter-spacing: 3px;
+  text-shadow: 2px 2px 0 var(--ink); text-align: center; padding: 0 16px;
+}
+.overlay-cta {
+  font-family: 'Bangers', cursive; font-size: 14px;
+  color: var(--ink); background: var(--gold-light);
+  padding: 6px 18px; border: 2px solid var(--ink);
+  letter-spacing: 2px; box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* Card body */
+.build-body { padding: 14px 16px 16px; border-top: 2px solid var(--ink); }
+.build-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.build-title {
+  font-family: 'Bangers', cursive; font-size: 22px;
+  color: var(--ink); letter-spacing: 2px; text-shadow: 1px 1px 0 var(--gold);
+  line-height: 1;
+}
+.build-cat-badge {
+  font-family: 'Bangers', cursive; font-size: 11px;
+  color: var(--cream); background: var(--od-green);
+  padding: 2px 8px; border: 2px solid var(--ink);
+  letter-spacing: 2px; white-space: nowrap; flex-shrink: 0;
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.build-card[data-cat="pistol"] .build-cat-badge { background: var(--cobalt); }
+.build-card[data-cat="cerakote"] .build-cat-badge { background: var(--red); }
+.build-card[data-cat="engraving"] .build-cat-badge { background: var(--gold); color: var(--ink); }
+.build-card[data-cat="shotgun"] .build-cat-badge { background: var(--dark-green); }
+.build-card[data-cat="precision"] .build-cat-badge { background: #6a3a8f; }
+
+.build-specs {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+}
+.build-spec-tag {
+  font-family: 'Share Tech Mono', monospace; font-size: 9px;
+  color: var(--od-green); background: rgba(74,94,42,0.08);
+  border: 1px solid rgba(74,94,42,0.3); padding: 2px 7px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.build-desc {
+  font-family: 'Oswald', sans-serif; font-weight: 400;
+  font-size: 12px; color: #555; line-height: 1.6;
+  margin-top: 8px; letter-spacing: 0.5px;
+}
+.build-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(0,0,0,0.15);
+}
+.build-num {
+  font-family: 'Share Tech Mono', monospace; font-size: 9px;
+  color: rgba(0,0,0,0.25); letter-spacing: 2px;
+}
+.build-view-btn {
+  font-family: 'Bangers', cursive; font-size: 13px;
+  color: var(--ink); background: var(--gold-light);
+  border: 2px solid var(--ink); padding: 3px 12px;
+  letter-spacing: 2px; cursor: crosshair;
+  box-shadow: 2px 2px 0 var(--ink); transition: transform 0.1s, box-shadow 0.1s;
+  text-decoration: none; display: inline-block;
+}
+.build-view-btn:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
+
+/* FEATURED / WIDE CARD */
+.build-card.featured .build-photo-placeholder { min-height: 280px; }
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(10,8,4,0.93);
+  z-index: 2000; display: flex;
+  align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  backdrop-filter: blur(4px);
+}
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox-box {
+  background: var(--cream);
+  border: 4px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink);
+  max-width: 880px; width: 94%;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+  transform: scale(0.93) rotate(-1deg);
+  transition: transform 0.25s;
+}
+.lightbox.open .lightbox-box { transform: scale(1) rotate(0deg); }
+
+/* LB Header */
+.lb-header {
+  background: var(--cobalt);
+  border-bottom: 3px solid var(--ink);
+  padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.lb-header-title {
+  font-family: 'Bangers', cursive; font-size: 20px;
+  color: var(--gold-light); letter-spacing: 4px;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+.lb-close {
+  font-family: 'Bangers', cursive; font-size: 15px;
+  color: var(--ink); background: var(--gold-light);
+  border: 2px solid var(--ink); padding: 4px 14px;
+  cursor: crosshair; letter-spacing: 2px;
+  box-shadow: 2px 2px 0 var(--ink); transition: transform 0.1s, box-shadow 0.1s;
+}
+.lb-close:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
+
+/* LB Image */
+.lb-img-zone {
+  background: linear-gradient(160deg, #1a1a0e, #0a0906);
+  min-height: 360px; display: flex;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border-bottom: 3px solid var(--ink);
+}
+.lb-img-zone::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+.lb-img-zone img { width: 100%; max-height: 460px; object-fit: contain; position: relative; z-index: 1; }
+.lb-placeholder-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  position: relative; z-index: 1;
+}
+.lb-placeholder-icon { font-size: 100px; opacity: 0.08; }
+.lb-placeholder-name {
+  font-family: 'Bangers', cursive; font-size: 42px;
+  color: var(--gold-light); text-shadow: 4px 4px 0 var(--ink);
+  letter-spacing: 5px; text-align: center;
+}
+.lb-placeholder-sub {
+  font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  color: var(--tan); letter-spacing: 4px; text-align: center;
+}
+
+/* LB Nav */
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  left: 0; right: 0; display: flex;
+  justify-content: space-between; padding: 0 12px; z-index: 2; pointer-events: none;
+}
+.lb-nav-btn {
+  font-family: 'Bangers', cursive; font-size: 22px;
+  color: var(--gold-light); background: rgba(10,8,4,0.7);
+  border: 2px solid var(--gold); width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: crosshair; pointer-events: all;
+  box-shadow: 2px 2px 0 var(--ink); transition: all 0.15s;
+}
+.lb-nav-btn:hover { background: var(--gold); color: var(--ink); }
+
+/* LB Details */
+.lb-details { padding: 24px 28px; }
+.lb-details-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;
+}
+.lb-detail-group h4 {
+  font-family: 'Share Tech Mono', monospace; font-size: 9px;
+  color: var(--od-green); letter-spacing: 4px; text-transform: uppercase;
+  margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 2px solid var(--ink);
+}
+.lb-spec-row {
+  display: flex; justify-content: space-between;
+  padding: 6px 0; border-bottom: 1px dashed rgba(0,0,0,0.1);
+  font-family: 'Oswald', sans-serif; font-size: 13px;
+}
+.lb-spec-row .lbl { color: #777; letter-spacing: 1px; }
+.lb-spec-row .val { color: var(--ink); font-weight: 600; letter-spacing: 1px; }
+.lb-spec-row .val.gold { color: var(--od-green); }
+.lb-cta-row {
+  display: flex; gap: 12px; padding-top: 16px;
+  border-top: 2px solid var(--ink); margin-top: 4px;
+}
+.lb-btn-gold {
+  font-family: 'Bangers', cursive; font-size: 17px; letter-spacing: 3px;
+  color: var(--ink); background: var(--gold-light);
+  border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+  padding: 10px 28px; cursor: crosshair;
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-decoration: none; display: inline-block;
+}
+.lb-btn-gold:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+.lb-btn-outline {
+  font-family: 'Bangers', cursive; font-size: 17px; letter-spacing: 3px;
+  color: var(--ink); background: transparent;
+  border: 3px solid var(--ink); box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
+  padding: 10px 28px; cursor: crosshair;
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-decoration: none; display: inline-block;
+}
+.lb-btn-outline:hover { background: rgba(0,0,0,0.05); transform: translate(2px,2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.15); }
+
+/* ── SUBMIT YOUR BUILD CTA ── */
+.submit-cta {
+  background: var(--od-green);
+  border-top: 4px solid var(--ink); border-bottom: 4px solid var(--ink);
+  padding: 50px 40px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.submit-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+.submit-cta-inner { position: relative; z-index: 1; }
+.submit-cta h2 {
+  font-family: 'Bangers', cursive; font-size: clamp(36px, 5vw, 60px);
+  color: var(--gold-light); text-shadow: 4px 4px 0 var(--ink);
+  letter-spacing: 5px; margin-bottom: 10px;
+}
+.submit-cta p {
+  font-family: 'Oswald', sans-serif; font-size: 15px;
+  color: var(--parchment); letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.submit-cta-btn {
+  font-family: 'Bangers', cursive; font-size: 20px; letter-spacing: 4px;
+  color: var(--ink); background: var(--gold-light);
+  border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+  padding: 14px 40px; cursor: crosshair; text-decoration: none;
+  display: inline-block; transition: transform 0.1s, box-shadow 0.1s;
+}
+.submit-cta-btn:hover { transform: translate(3px,3px); box-shadow: 3px 3px 0 var(--ink); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark-green); border-top: 4px solid var(--ink);
+  padding: 22px 40px; display: flex;
+  align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.foot-logo { font-family: 'Bangers', cursive; font-size: 22px; color: var(--gold-light); text-shadow: 2px 2px 0 var(--ink); letter-spacing: 4px; }
+.foot-logo a { color: inherit; text-decoration: none; }
+.foot-logo span { color: var(--red-bright); }
+.foot-tag { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--tan); letter-spacing: 4px; }
+.foot-copy { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: rgba(200,169,110,0.4); letter-spacing: 2px; }
+.bottom-hazard {
+  background: repeating-linear-gradient(-45deg, var(--gold-light) 0px, var(--gold-light) 16px, var(--ink) 16px, var(--ink) 32px);
+  height: 8px; border-top: 2px solid var(--ink);
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center; padding: 80px 20px;
+  display: none;
+}
+.empty-state.show { display: block; }
+.empty-icon { font-size: 60px; opacity: 0.15; display: block; margin-bottom: 16px; }
+.empty-text { font-family: 'Bangers', cursive; font-size: 28px; color: var(--tan); letter-spacing: 4px; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .nav-stripe { display: none; }
+  .gallery-main { padding: 30px 16px 60px; }
+  .lb-details-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hazard-tape"><span>★ TOP SECRET ★ BATTLE FORGED CUSTOMS ★ CANTON MI ★</span></div>
+
+<div class="ticker">
+  <span class="ticker-inner">★ BATTLE FORGED CUSTOMS — CANTON MI ★ CUSTOM BUILDS ★ CERAKOTE ★ LASER ENGRAVING ★ PRECISION TUNING ★ 313-605-7087 ★ FORGED TO WIN ★ BFC FOUGHT · FORGED IN BATTLE · BORN TO BUILD ★ BATTLE FORGED CUSTOMS — CANTON MI ★ CUSTOM BUILDS ★ CERAKOTE ★ LASER ENGRAVING ★ PRECISION TUNING ★ 313-605-7087 ★ FORGED TO WIN ★ BFC FOUGHT · FORGED IN BATTLE · BORN TO BUILD ★&nbsp;</span>
+</div>
+
+<nav>
+  <div class="nav-logo-wrap">
+    <a class="nav-logo" href="index.html">BATTLE<span class="slash">/</span>FORGED</a>
+  </div>
+  <div class="nav-stripe">
+    <a href="index.html#services" class="nav-link">Services</a>
+    <a href="index.html#shop" class="nav-link">Shop</a>
+    <a href="index.html#about" class="nav-link">Operator</a>
+    <a href="gallery.html" class="nav-link active">Gallery</a>
+    <a href="index.html#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-cta-wrap">
+    <a href="index.html#contact" class="nav-cta">BUILD YOURS ▶</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="page-header-eyebrow">▶ Battle Forged Customs — Canton, MI</span>
+    <h1>BUILD<span>GALLERY</span></h1>
+    <p class="page-header-sub">Custom Builds · Cerakote Finishes · Laser Engraving · Precision Tuning</p>
+    <div class="header-rule"><span class="header-rule-star">★</span></div>
+  </div>
+</div>
+
+<!-- COUNTER STRIP -->
+<div class="counter-strip">
+  <div class="counter-item">
+    <span class="counter-num" id="count-total">12</span>
+    <span class="counter-label">Total Builds</span>
+  </div>
+  <div class="counter-divider"></div>
+  <div class="counter-item">
+    <span class="counter-num">4</span>
+    <span class="counter-label">AR Builds</span>
+  </div>
+  <div class="counter-divider"></div>
+  <div class="counter-item">
+    <span class="counter-num">3</span>
+    <span class="counter-label">Pistol Builds</span>
+  </div>
+  <div class="counter-divider"></div>
+  <div class="counter-item">
+    <span class="counter-num">3</span>
+    <span class="counter-label">Cerakote Jobs</span>
+  </div>
+  <div class="counter-divider"></div>
+  <div class="counter-item">
+    <span class="counter-num">2</span>
+    <span class="counter-label">Engravings</span>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-main">
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">// Filter:</span>
+    <button class="filter-btn active" onclick="filterBuilds(this,'all')">ALL BUILDS</button>
+    <button class="filter-btn" onclick="filterBuilds(this,'ar15')">AR PLATFORM</button>
+    <button class="filter-btn" onclick="filterBuilds(this,'pistol')">PISTOLS</button>
+    <button class="filter-btn" onclick="filterBuilds(this,'shotgun')">SHOTGUNS</button>
+    <button class="filter-btn" onclick="filterBuilds(this,'cerakote')">CERAKOTE</button>
+    <button class="filter-btn" onclick="filterBuilds(this,'engraving')">ENGRAVING</button>
+    <button class="filter-btn" onclick="filterBuilds(this,'precision')">PRECISION</button>
+    <span class="filter-count" id="filter-count">Showing 12 builds</span>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="empty-state">
+    <span class="empty-icon">🔍</span>
+    <span class="empty-text">NO BUILDS IN THIS CATEGORY YET</span>
+  </div>
+
+  <!-- BUILD GRID -->
+  <!--
+    HOW TO ADD REAL PHOTOS:
+    1. Upload your photo to the GitHub repo alongside index.html
+    2. Replace the build-photo-placeholder div with:
+       <div class="build-photo">
+         <img src="your-photo.jpg" alt="Build name">
+         <div class="build-photo-overlay">...</div>
+       </div>
+  -->
+  <div class="build-grid" id="build-grid">
+
+    <!-- BUILD 01 — OD Operator AR -->
+    <div class="build-card featured" data-cat="ar15" data-id="1">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔫</div>
+          <div class="ph-label">AR-15 // OD GREEN</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">OD OPERATOR</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">OD Operator</div>
+          <div class="build-cat-badge">AR-15</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">16" Match Barrel</span>
+          <span class="build-spec-tag">OD Green Cerakote</span>
+          <span class="build-spec-tag">Enhanced Trigger</span>
+          <span class="build-spec-tag">Laser Engraved</span>
+        </div>
+        <div class="build-desc">Full custom AR-15 build with OD Green Cerakote finish, 16" match grade barrel, and custom laser engraving. Built for the operator who demands perfection.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-001</span>
+          <button class="build-view-btn" onclick="openLightbox(0)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 02 — FDE Precision -->
+    <div class="build-card" data-cat="ar15" data-id="2">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔫</div>
+          <div class="ph-label">AR-15 // FDE</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">FDE SERIES</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">FDE Precision</div>
+          <div class="build-cat-badge">AR-15</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">18" Match Grade</span>
+          <span class="build-spec-tag">Flat Dark Earth</span>
+          <span class="build-spec-tag">Geissele Trigger</span>
+        </div>
+        <div class="build-desc">18" match grade barrel with FDE Cerakote, Geissele SSA trigger, and 15" M-LOK free-float handguard.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-002</span>
+          <button class="build-view-btn" onclick="openLightbox(1)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 03 — Black Widow Pistol -->
+    <div class="build-card" data-cat="pistol" data-id="3">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔒</div>
+          <div class="ph-label">PISTOL // MATTE BLACK</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">BLACK WIDOW</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Black Widow</div>
+          <div class="build-cat-badge">PISTOL</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">Glock 19</span>
+          <span class="build-spec-tag">Matte Black</span>
+          <span class="build-spec-tag">RMR Cut</span>
+          <span class="build-spec-tag">Threaded Barrel</span>
+        </div>
+        <div class="build-desc">Glock 19 custom build — matte black Cerakote, competition trigger, RMR optic cut, threaded barrel, and laser-engraved "BLACK WIDOW" on the slide.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-003</span>
+          <button class="build-view-btn" onclick="openLightbox(2)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 04 — Eagle Engraving -->
+    <div class="build-card" data-cat="engraving" data-id="4">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔆</div>
+          <div class="ph-label">LASER ENGRAVING</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">EAGLE CUSTOM</div>
+          <div class="overlay-cta">▶ VIEW WORK</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Eagle Custom</div>
+          <div class="build-cat-badge">ENGRAVING</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">1911 Platform</span>
+          <span class="build-spec-tag">Eagle Crest</span>
+          <span class="build-spec-tag">Fiber Laser</span>
+        </div>
+        <div class="build-desc">Custom eagle crest laser engraving on a 1911 — fiber laser precision with deep relief contrast. Custom unit crest and owner's name engraved on the slide.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-004</span>
+          <button class="build-view-btn" onclick="openLightbox(3)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 05 — Tungsten Wolf AR -->
+    <div class="build-card" data-cat="ar15" data-id="5">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔫</div>
+          <div class="ph-label">AR-15 // TUNGSTEN</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">TUNGSTEN WOLF</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Tungsten Wolf</div>
+          <div class="build-cat-badge">AR-15</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">20" Heavy Profile</span>
+          <span class="build-spec-tag">Tungsten Cerakote</span>
+          <span class="build-spec-tag">LaRue MBT-2S</span>
+          <span class="build-spec-tag">Co-Witness Optic</span>
+        </div>
+        <div class="build-desc">Competition-grade AR-15 with 20" heavy profile barrel, tungsten Cerakote, LaRue MBT-2S trigger, and "FORGED TO WIN" laser engraving.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-005</span>
+          <button class="build-view-btn" onclick="openLightbox(4)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 06 — MultiCam AR10 -->
+    <div class="build-card featured" data-cat="cerakote" data-id="6">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🎨</div>
+          <div class="ph-label">CERAKOTE // MULTICAM</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">MULTICAM SERIES</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">MultiCam Series</div>
+          <div class="build-cat-badge">CERAKOTE</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">AR-10 Platform</span>
+          <span class="build-spec-tag">MultiCam Pattern</span>
+          <span class="build-spec-tag">18" Match Barrel</span>
+          <span class="build-spec-tag">QD Muzzle Brake</span>
+        </div>
+        <div class="build-desc">Full MultiCam pattern Cerakote on an AR-10 — 5-color stencil process, 18" match barrel, enhanced trigger group, and QD muzzle brake installation.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-006</span>
+          <button class="build-view-btn" onclick="openLightbox(5)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 07 — Midnight Carry Pistol -->
+    <div class="build-card" data-cat="pistol" data-id="7">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔒</div>
+          <div class="ph-label">PISTOL // MIDNIGHT BLUE</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">MIDNIGHT CARRY</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Midnight Carry</div>
+          <div class="build-cat-badge">PISTOL</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">SIG P320</span>
+          <span class="build-spec-tag">Midnight Blue</span>
+          <span class="build-spec-tag">ROMEO1 Red Dot</span>
+        </div>
+        <div class="build-desc">SIG P320 compact carry build — midnight blue Cerakote, enhanced trigger, ROMEO1 red dot optic, and custom laser engraving on the grip module.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-007</span>
+          <button class="build-view-btn" onclick="openLightbox(6)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 08 — Unit Crest Engraving -->
+    <div class="build-card" data-cat="engraving" data-id="8">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔆</div>
+          <div class="ph-label">ENGRAVING // PRECISION RIFLE</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">UNIT CREST</div>
+          <div class="overlay-cta">▶ VIEW WORK</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Unit Crest</div>
+          <div class="build-cat-badge">ENGRAVING</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">Remington 700</span>
+          <span class="build-spec-tag">Coyote Brown</span>
+          <span class="build-spec-tag">Military Tribute</span>
+        </div>
+        <div class="build-desc">Remington 700 precision rifle with Coyote Brown Cerakote finish and custom military unit crest laser engraved on the action. 20 MOA rail installation included.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-008</span>
+          <button class="build-view-btn" onclick="openLightbox(7)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 09 — Tactical Mossberg -->
+    <div class="build-card" data-cat="shotgun" data-id="9">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🎯</div>
+          <div class="ph-label">SHOTGUN // TACTICAL</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">BREACHER</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">The Breacher</div>
+          <div class="build-cat-badge">SHOTGUN</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">Mossberg 590</span>
+          <span class="build-spec-tag">Matte Black</span>
+          <span class="build-spec-tag">M-LOK Forend</span>
+          <span class="build-spec-tag">Extended Mag</span>
+        </div>
+        <div class="build-desc">Mossberg 590 tactical build — matte black Cerakote, M-LOK tactical forend, extended magazine tube, and heat shield. Built for home defense or competition.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-009</span>
+          <button class="build-view-btn" onclick="openLightbox(8)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 10 — Crimson Tide Pistol -->
+    <div class="build-card" data-cat="pistol" data-id="10">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔒</div>
+          <div class="ph-label">PISTOL // CRIMSON RED</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">CRIMSON TIDE</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Crimson Tide</div>
+          <div class="build-cat-badge">PISTOL</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">1911 Platform</span>
+          <span class="build-spec-tag">Crimson Red</span>
+          <span class="build-spec-tag">Match Trigger</span>
+          <span class="build-spec-tag">Custom Grips</span>
+        </div>
+        <div class="build-desc">1911 full custom — crimson red Cerakote with polished flats, match trigger job, custom hardwood grips, and owner's initials laser engraved on the backstrap.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-010</span>
+          <button class="build-view-btn" onclick="openLightbox(9)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 11 — Ghost AR -->
+    <div class="build-card" data-cat="ar15" data-id="11">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🔫</div>
+          <div class="ph-label">AR-15 // STEALTH</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">GHOST OPERATOR</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Ghost Operator</div>
+          <div class="build-cat-badge">AR-15</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">14.5" Pinned</span>
+          <span class="build-spec-tag">Stealth Grey</span>
+          <span class="build-spec-tag">Geissele SSA-E</span>
+          <span class="build-spec-tag">Full BFC Build</span>
+        </div>
+        <div class="build-desc">Stealth grey Cerakote AR-15, 14.5" pinned barrel, Geissele SSA-E trigger, BCM stock, and MBUS sights. Full BFC custom ground-up build.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-011</span>
+          <button class="build-view-btn" onclick="openLightbox(10)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD 12 — Precision Hunter -->
+    <div class="build-card" data-cat="precision" data-id="12">
+      <div class="build-card-bar"></div>
+      <div class="build-photo">
+        <div class="build-photo-placeholder">
+          <div class="ph-icon">🎯</div>
+          <div class="ph-label">PRECISION // BOLT ACTION</div>
+        </div>
+        <div class="build-photo-overlay">
+          <div class="overlay-title">PRECISION HUNTER</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Precision Hunter</div>
+          <div class="build-cat-badge">PRECISION</div>
+        </div>
+        <div class="build-specs">
+          <span class="build-spec-tag">Savage 110</span>
+          <span class="build-spec-tag">OD / Coyote Two-Tone</span>
+          <span class="build-spec-tag">Timney Trigger</span>
+          <span class="build-spec-tag">Chassis Stock</span>
+        </div>
+        <div class="build-desc">Savage 110 precision hunter — OD/Coyote two-tone Cerakote, Timney Elite Hunter trigger, chassis stock, and 20 MOA Picatinny rail. Sub-MOA performance guaranteed.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-012</span>
+          <button class="build-view-btn" onclick="openLightbox(11)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /build-grid -->
+</div><!-- /gallery-main -->
+
+<!-- SUBMIT YOUR BUILD CTA -->
+<div class="submit-cta">
+  <div class="submit-cta-inner">
+    <h2>WANT YOUR BUILD HERE?</h2>
+    <p>Get your firearm forged by BFC — Canton, Michigan's premier gunsmith</p>
+    <a href="index.html#contact" class="submit-cta-btn">▶ REQUEST A BUILD</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo"><a href="index.html">BATTLE<span>/</span>FORGED CUSTOMS</a></div>
+  <div class="foot-tag">★ FORGED TO WIN ★ CANTON, MI ★</div>
+  <div class="foot-copy">© 2024 BATTLE FORGED CUSTOMS · 313-605-7087</div>
+</footer>
+<div class="bottom-hazard"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLbOutside(event)">
+  <div class="lightbox-box" id="lb-box">
+    <div class="lb-header">
+      <span class="lb-header-title" id="lb-title">// BUILD FILE</span>
+      <button class="lb-close" onclick="closeLightbox()">[ CLOSE X ]</button>
+    </div>
+    <div class="lb-img-zone" id="lb-img-zone">
+      <div class="lb-nav">
+        <button class="lb-nav-btn" onclick="lbNav(-1)">◀</button>
+        <button class="lb-nav-btn" onclick="lbNav(1)">▶</button>
+      </div>
+      <div class="lb-placeholder-wrap" id="lb-placeholder">
+        <div class="lb-placeholder-icon" id="lb-icon">🔫</div>
+        <div class="lb-placeholder-name" id="lb-name">BUILD NAME</div>
+        <div class="lb-placeholder-sub" id="lb-sub">SPEC DETAILS</div>
+      </div>
+    </div>
+    <div class="lb-details">
+      <div class="lb-details-grid">
+        <div class="lb-detail-group">
+          <h4>// Build Specifications</h4>
+          <div class="lb-spec-row"><span class="lbl">Platform</span><span class="val gold" id="lb-platform">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Barrel</span><span class="val" id="lb-barrel">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Finish</span><span class="val" id="lb-finish">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Trigger</span><span class="val" id="lb-trigger">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">File No.</span><span class="val" id="lb-filenum">—</span></div>
+        </div>
+        <div class="lb-detail-group">
+          <h4>// Add-On Services</h4>
+          <div class="lb-spec-row"><span class="lbl">Engraving</span><span class="val" id="lb-engrave">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Optics</span><span class="val" id="lb-optics">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Muzzle Device</span><span class="val" id="lb-muzzle">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Build Time</span><span class="val" id="lb-time">—</span></div>
+          <div class="lb-spec-row"><span class="lbl">Status</span><span class="val gold" id="lb-status">—</span></div>
+        </div>
+      </div>
+      <div class="lb-cta-row">
+        <a href="index.html#contact" class="lb-btn-gold" onclick="closeLightbox()">▶ BUILD SIMILAR</a>
+        <a href="index.html#contact" class="lb-btn-outline" onclick="closeLightbox()">REQUEST QUOTE</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── BUILD DATA ───────────────────────────────────────
+const builds = [
+  { id:1, name:'OD Operator', cat:'ar15', icon:'🔫', sub:'AR-15 Custom Build · OD Green Cerakote',
+    platform:'AR-15', barrel:'16" Match Grade', finish:'OD Green Cerakote', trigger:'Enhanced Combat',
+    engrave:'OPERATOR', optics:'Co-Witness', muzzle:'A2 Flash Hider', time:'2 weeks', status:'COMPLETED' },
+  { id:2, name:'FDE Precision', cat:'ar15', icon:'🔫', sub:'AR-15 · Flat Dark Earth',
+    platform:'AR-15', barrel:'18" Match Grade', finish:'Flat Dark Earth', trigger:'Geissele SSA',
+    engrave:'None', optics:'20 MOA Rail', muzzle:'Surefire MB', time:'2.5 weeks', status:'COMPLETED' },
+  { id:3, name:'Black Widow', cat:'pistol', icon:'🔒', sub:'Glock 19 Custom · Matte Black',
+    platform:'Glock 19', barrel:'4.5" Threaded', finish:'Matte Black', trigger:'Competition',
+    engrave:'BLACK WIDOW', optics:'RMR Cut', muzzle:'Dead Air Comp', time:'10 days', status:'COMPLETED' },
+  { id:4, name:'Eagle Custom', cat:'engraving', icon:'🔆', sub:'1911 · Fiber Laser Engraving',
+    platform:'1911 Platform', barrel:'5" Standard', finish:'Polished Black', trigger:'Match',
+    engrave:'Eagle Crest + Name', optics:'None', muzzle:'Standard', time:'3 days', status:'COMPLETED' },
+  { id:5, name:'Tungsten Wolf', cat:'ar15', icon:'🔫', sub:'AR-15 Competition · Tungsten',
+    platform:'AR-15', barrel:'20" Heavy Profile', finish:'Tungsten Cerakote', trigger:'LaRue MBT-2S',
+    engrave:'FORGED TO WIN', optics:'Co-Witness', muzzle:'Competition Brake', time:'3 weeks', status:'COMPLETED' },
+  { id:6, name:'MultiCam Series', cat:'cerakote', icon:'🎨', sub:'AR-10 · MultiCam Pattern Cerakote',
+    platform:'AR-10', barrel:'18" Match', finish:'5-Color MultiCam', trigger:'Enhanced',
+    engrave:'None', optics:'Included', muzzle:'QD Brake', time:'3 weeks', status:'COMPLETED' },
+  { id:7, name:'Midnight Carry', cat:'pistol', icon:'🔒', sub:'SIG P320 · Midnight Blue',
+    platform:'SIG P320 Compact', barrel:'3.9" Standard', finish:'Midnight Blue', trigger:'Enhanced',
+    engrave:'MIDNIGHT', optics:'ROMEO1 Pro', muzzle:'Standard', time:'1 week', status:'COMPLETED' },
+  { id:8, name:'Unit Crest', cat:'engraving', icon:'🔆', sub:'Remington 700 · Military Tribute',
+    platform:'Remington 700', barrel:'24" Precision', finish:'Coyote Brown', trigger:'Timney',
+    engrave:'Unit Crest', optics:'20 MOA Rail', muzzle:'Muzzle Brake', time:'2 weeks', status:'COMPLETED' },
+  { id:9, name:'The Breacher', cat:'shotgun', icon:'🎯', sub:'Mossberg 590 · Tactical Build',
+    platform:'Mossberg 590', barrel:'18.5" Cylinder', finish:'Matte Black', trigger:'Standard',
+    engrave:'None', optics:'Ghost Ring Sights', muzzle:'Breacher Device', time:'1 week', status:'COMPLETED' },
+  { id:10, name:'Crimson Tide', cat:'pistol', icon:'🔒', sub:'1911 · Crimson Red Cerakote',
+    platform:'1911 Platform', barrel:'5" Match', finish:'Crimson Red + Polished', trigger:'Match Job',
+    engrave:'Owner Initials', optics:'Night Sights', muzzle:'Standard', time:'2 weeks', status:'COMPLETED' },
+  { id:11, name:'Ghost Operator', cat:'ar15', icon:'🔫', sub:'AR-15 Stealth Build · Grey',
+    platform:'AR-15', barrel:'14.5" Pinned', finish:'Stealth Grey', trigger:'Geissele SSA-E',
+    engrave:'None', optics:'MBUS Sights', muzzle:'Pinned Comp', time:'2.5 weeks', status:'COMPLETED' },
+  { id:12, name:'Precision Hunter', cat:'precision', icon:'🎯', sub:'Savage 110 · Two-Tone Cerakote',
+    platform:'Savage 110', barrel:'24" Heavy', finish:'OD/Coyote Two-Tone', trigger:'Timney Elite',
+    engrave:'None', optics:'20 MOA Rail', muzzle:'Muzzle Brake', time:'2 weeks', status:'COMPLETED' },
+];
+
+let currentLbIdx = 0;
+let visibleBuilds = [...builds];
+
+// ── FILTER ───────────────────────────────────────────
+function filterBuilds(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.build-card');
+  visibleBuilds = cat === 'all' ? builds : builds.filter(b => b.cat === cat);
+
+  let shown = 0;
+  cards.forEach((card, i) => {
+    const match = cat === 'all' || card.dataset.cat === cat;
+    card.classList.toggle('hidden', !match);
+    if (match) {
+      card.style.animationDelay = (shown * 0.05) + 's';
+      card.style.animation = 'none';
+      card.offsetHeight; // reflow
+      card.style.animation = '';
+      shown++;
+    }
+  });
+
+  document.getElementById('filter-count').textContent =
+    `Showing ${shown} build${shown !== 1 ? 's' : ''}`;
+  document.getElementById('empty-state').classList.toggle('show', shown === 0);
+}
+
+// ── LIGHTBOX ─────────────────────────────────────────
+function openLightbox(idx) {
+  currentLbIdx = idx;
+  populateLb(visibleBuilds[idx] || builds[idx]);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function populateLb(b) {
+  document.getElementById('lb-title').textContent = '// BUILD FILE: ' + b.name.toUpperCase() + ' — BFC-00' + b.id;
+  document.getElementById('lb-icon').textContent = b.icon;
+  document.getElementById('lb-name').textContent = b.name.toUpperCase();
+  document.getElementById('lb-sub').textContent = b.sub.toUpperCase();
+  document.getElementById('lb-platform').textContent = b.platform;
+  document.getElementById('lb-barrel').textContent = b.barrel;
+  document.getElementById('lb-finish').textContent = b.finish;
+  document.getElementById('lb-trigger').textContent = b.trigger;
+  document.getElementById('lb-filenum').textContent = 'BFC-00' + b.id;
+  document.getElementById('lb-engrave').textContent = b.engrave;
+  document.getElementById('lb-optics').textContent = b.optics;
+  document.getElementById('lb-muzzle').textContent = b.muzzle;
+  document.getElementById('lb-time').textContent = b.time;
+  document.getElementById('lb-status').textContent = b.status;
+}
+
+function lbNav(dir) {
+  const arr = visibleBuilds.length ? visibleBuilds : builds;
+  currentLbIdx = (currentLbIdx + dir + arr.length) % arr.length;
+  populateLb(arr[currentLbIdx]);
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLbOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+// Wire up card hover clicks to lightbox
+document.querySelectorAll('.build-card').forEach((card, i) => {
+  card.querySelector('.build-photo')?.addEventListener('click', () => openLightbox(i));
+});
+</script>
+</body>
+</html>
