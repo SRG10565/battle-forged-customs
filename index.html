@@ -1539,7 +1539,7 @@ footer {
             <span class="product-price" style="color:var(--od-green);">$395</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-1">
-            <a href="#contact" class="comic-buy-btn green-btn">▶ BOOK THIS PACKAGE</a>
+            <div id="product-component-1773431354278"></div>
           </div>
         </div>
       </div>
@@ -1566,7 +1566,7 @@ footer {
             <span class="product-price" style="color:var(--cobalt);">$595</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-2">
-            <a href="#contact" class="comic-buy-btn">▶ BOOK THIS PACKAGE</a>
+            <div id="product-component-1773431377678"></div>
           </div>
         </div>
       </div>
@@ -1593,7 +1593,7 @@ footer {
             <span class="product-price" style="color:var(--red);">$895</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-3">
-            <a href="#contact" class="comic-buy-btn red-btn">▶ BOOK THIS PACKAGE</a>
+            <div id="product-component-1773431397587"></div>
           </div>
         </div>
       </div>
@@ -1614,7 +1614,7 @@ footer {
             <span class="product-price" style="font-size:22px;">FROM $600</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-4">
-            <a href="#contact" class="comic-buy-btn">▶ GET A QUOTE</a>
+            <div id="product-component-1773431650751"></div>
           </div>
         </div>
       </div>
@@ -1741,7 +1741,12 @@ footer {
           <span style="font-family:'Bangers',cursive;font-size:18px;color:var(--gold-light);display:block;letter-spacing:2px;text-shadow:1px 1px 0 var(--ink);">${p}</span>
           <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(245,230,200,0.7);letter-spacing:2px;">${s.toUpperCase()}</span>
         </div>`).join('')}
-      <a href="#contact" class="comic-buy-btn" style="margin-left:auto;">▶ ORDER NOW</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-left:auto;align-items:center;">
+        <div id="product-component-1773431672390"></div>
+        <div id="product-component-1773431689086"></div>
+        <div id="product-component-1773431704412"></div>
+        <div id="product-component-1773431719100"></div>
+      </div>
     </div>
 
     <!-- POLICIES NOTE -->
@@ -1921,132 +1926,166 @@ footer {
 </footer>
 <div class="bottom-hazard"></div>
 
-<!-- ════════ SHOPIFY STOREFRONT API INTEGRATION ════════
-     HOW TO CONNECT:
-     1. In Shopify Admin → Apps → Develop apps → Create app
-     2. Under "Storefront API" enable: products, variants, checkout
-     3. Copy your Storefront Access Token
-     4. Replace YOUR_SHOPIFY_DOMAIN and YOUR_STOREFRONT_TOKEN below
-     5. Replace the product IDs in the products array with your real Shopify product IDs
-     ════════════════════════════════════════════════════ -->
-<script>
-const SHOPIFY_DOMAIN = 'YOUR_SHOPIFY_DOMAIN.myshopify.com'; // e.g. battle-forged-customs.myshopify.com
-const STOREFRONT_TOKEN = 'YOUR_STOREFRONT_TOKEN';           // Storefront API public token
-
-// Map each product card to a Shopify product GID
-// Get product IDs from Shopify Admin → Products → click product → ID in URL
-const PRODUCTS = [
-  { btnId: 'shopify-btn-1', productId: 'YOUR_PRODUCT_ID_1' }, // Cerakote Package
-  { btnId: 'shopify-btn-2', productId: 'YOUR_PRODUCT_ID_2' }, // Laser Engraving
-  { btnId: 'shopify-btn-3', productId: 'YOUR_PRODUCT_ID_3' }, // Custom Build
-  { btnId: 'shopify-btn-4', productId: 'YOUR_PRODUCT_ID_4' }, // BFC Merch
-];
-
-async function loadShopifyProducts() {
-  if (SHOPIFY_DOMAIN.includes('YOUR_SHOPIFY_DOMAIN') || STOREFRONT_TOKEN.includes('YOUR_STOREFRONT_TOKEN')) {
-    console.log('[BFC Shop] Shopify not configured yet — showing fallback buttons.');
-    return; // Keep fallback buttons
+<!-- ════════ SHOPIFY BUY BUTTON INTEGRATION ════════ -->
+<script type="text/javascript">
+/*<![CDATA[*/
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) {
+      ShopifyBuyInit();
+    } else {
+      loadScript();
+    }
+  } else {
+    loadScript();
+  }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
   }
 
-  for (const p of PRODUCTS) {
-    try {
-      const gid = `gid://shopify/Product/${p.productId}`;
-      const query = `{
-        product(id: "${gid}") {
-          title
-          variants(first: 1) {
-            edges { node { id price { amount } availableForSale } }
+  var domain = 'b3smty-zh.myshopify.com';
+  var token = '84ae60cc504e488de47aa580a23bfb95';
+
+  // All 8 products: [node_id, product_id]
+  var products = [
+    ['product-component-1773431354278', '10295497523481'],  // Battle Ready Package
+    ['product-component-1773431377678', '10295500177689'],  // Warfighter Package
+    ['product-component-1773431397587', '10295499391257'],  // Elite Operator Package
+    ['product-component-1773431650751', '10295498932505'],  // Custom AR Build
+    ['product-component-1773431672390', '10295498506521'],  // Cerakote
+    ['product-component-1773431689086', '10295499456793'],  // Laser Engraving
+    ['product-component-1773431704412', '10295499882777'],  // Precision Tuning
+    ['product-component-1773431719100', '10295498440985'],  // BFC Merch
+  ];
+
+  var buttonOptions = {
+    "product": {
+      "styles": {
+        "product": {
+          "@media (min-width: 601px)": {
+            "max-width": "100%",
+            "margin-left": "0px",
+            "margin-bottom": "0px"
+          }
+        },
+        "button": {
+          "font-family": "Bangers, cursive",
+          "font-size": "16px",
+          "letter-spacing": "3px",
+          "padding-top": "10px",
+          "padding-bottom": "10px",
+          "color": "#1a1008",
+          "background-color": "#f5c842",
+          "border-radius": "0px",
+          "border": "3px solid #1a1008",
+          ":hover": {
+            "background-color": "#d4a017",
+            "color": "#1a1008"
+          },
+          ":focus": {
+            "background-color": "#d4a017"
           }
         }
-      }`;
-
-      const res = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN,
-        },
-        body: JSON.stringify({ query }),
-      });
-
-      const data = await res.json();
-      const product = data?.data?.product;
-      if (!product) continue;
-
-      const variant = product.variants.edges[0]?.node;
-      if (!variant) continue;
-
-      const variantId = variant.id;
-      const price = parseFloat(variant.price.amount).toFixed(2);
-      const available = variant.availableForSale;
-
-      const zone = document.getElementById(p.btnId);
-      if (!zone) continue;
-
-      if (available) {
-        zone.innerHTML = `
-          <button class="comic-buy-btn green-btn" onclick="addToCart('${variantId}')">
-            ▶ ADD TO CART — $${price}
-          </button>`;
-      } else {
-        zone.innerHTML = `<button class="comic-buy-btn" style="opacity:0.5;cursor:not-allowed">SOLD OUT</button>`;
-      }
-
-      // Hide setup notice since we're connected
-      const notice = document.getElementById('shopify-notice');
-      if (notice) notice.style.display = 'none';
-
-    } catch (err) {
-      console.warn('[BFC Shop] Failed to load product:', p.productId, err);
-    }
-  }
-}
-
-// Cart management
-let cartId = null;
-
-async function getOrCreateCart() {
-  if (cartId) return cartId;
-  const mutation = `mutation { cartCreate { cart { id checkoutUrl } } }`;
-  const res = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN,
-    },
-    body: JSON.stringify({ query: mutation }),
-  });
-  const data = await res.json();
-  cartId = data?.data?.cartCreate?.cart?.id;
-  window._cartCheckoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
-  return cartId;
-}
-
-async function addToCart(variantId) {
-  try {
-    const cId = await getOrCreateCart();
-    const mutation = `mutation {
-      cartLinesAdd(cartId: "${cId}", lines: [{ merchandiseId: "${variantId}", quantity: 1 }]) {
-        cart { id totalQuantity }
-      }
-    }`;
-    await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN,
       },
-      body: JSON.stringify({ query: mutation }),
-    });
-    // Redirect to checkout
-    if (window._cartCheckoutUrl) window.open(window._cartCheckoutUrl, '_blank');
-    else alert('Added to cart! Visit your Shopify store to checkout.');
-  } catch (err) {
-    console.error('[BFC Shop] Add to cart failed:', err);
-    alert('Unable to add to cart. Please contact us directly at 313-605-7087.');
-  }
-}
+      "contents": {
+        "img": false,
+        "title": false,
+        "price": false
+      },
+      "text": {
+        "button": "▶ ADD TO CART"
+      }
+    },
+    "modalProduct": {
+      "contents": {
+        "img": false,
+        "imgWithCarousel": true,
+        "button": false,
+        "buttonWithQuantity": true
+      },
+      "styles": {
+        "product": {
+          "@media (min-width: 601px)": {
+            "max-width": "100%",
+            "margin-left": "0px",
+            "margin-bottom": "0px"
+          }
+        },
+        "button": {
+          "font-family": "Bangers, cursive",
+          "font-size": "16px",
+          "letter-spacing": "3px",
+          "color": "#1a1008",
+          "background-color": "#f5c842",
+          "border-radius": "0px",
+          ":hover": { "background-color": "#d4a017" }
+        }
+      },
+      "text": { "button": "▶ ADD TO CART" }
+    },
+    "cart": {
+      "styles": {
+        "button": {
+          "font-family": "Bangers, cursive",
+          "font-size": "16px",
+          "letter-spacing": "3px",
+          "color": "#1a1008",
+          "background-color": "#f5c842",
+          "border-radius": "0px",
+          ":hover": { "background-color": "#d4a017" }
+        }
+      },
+      "text": {
+        "total": "Subtotal",
+        "button": "CHECKOUT ▶"
+      }
+    },
+    "toggle": {
+      "styles": {
+        "toggle": {
+          "font-family": "Bangers, cursive",
+          "background-color": "#4a5e2a",
+          ":hover": { "background-color": "#2d3a18" },
+          ":focus": { "background-color": "#2d3a18" }
+        },
+        "count": { "font-size": "16px", "color": "#f5c842" },
+        "iconPath": { "fill": "#f5c842" }
+      }
+    },
+    "option": {}
+  };
 
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: domain,
+      storefrontAccessToken: token,
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      products.forEach(function(p) {
+        var nodeId = p[0];
+        var productId = p[1];
+        var node = document.getElementById(nodeId);
+        if (node) {
+          ui.createComponent('product', {
+            id: productId,
+            node: node,
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: buttonOptions
+          });
+        }
+      });
+    });
+  }
+})();
+/*]]>*/
+</script>
+
+<script>
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -2054,9 +2093,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
-
-// Init
-document.addEventListener('DOMContentLoaded', loadShopifyProducts);
 </script>
 
 </body>
