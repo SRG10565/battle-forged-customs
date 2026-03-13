@@ -589,7 +589,7 @@ footer {
 <!-- COUNTER STRIP -->
 <div class="counter-strip">
   <div class="counter-item">
-    <span class="counter-num" id="count-total">12</span>
+    <span class="counter-num" id="count-total">18</span>
     <span class="counter-label">Total Builds</span>
   </div>
   <div class="counter-divider"></div>
@@ -627,7 +627,7 @@ footer {
     <button class="filter-btn" onclick="filterBuilds(this,'cerakote')">CERAKOTE</button>
     <button class="filter-btn" onclick="filterBuilds(this,'engraving')">ENGRAVING</button>
     <button class="filter-btn" onclick="filterBuilds(this,'precision')">PRECISION</button>
-    <span class="filter-count" id="filter-count">Showing 12 builds</span>
+    <span class="filter-count" id="filter-count">Showing 18 builds</span>
   </div>
 
   <!-- EMPTY STATE -->
@@ -646,388 +646,386 @@ footer {
          <div class="build-photo-overlay">...</div>
        </div>
   -->
-  <div class="build-grid" id="build-grid">
+    <div class="build-grid" id="build-grid">
 
-    <!-- BUILD 01 — OD Operator AR -->
-    <div class="build-card featured" data-cat="ar15" data-id="1">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔫</div>
-          <div class="ph-label">AR-15 // OD GREEN</div>
-        </div>
+    <div class="build-card" data-cat="shotgun" data-id="1">
+      <div class="build-card-bar" style="background:var(--dark-green)"></div>
+      <div class="build-photo" onclick="openLightbox(0)">
+        <img src="gallery/build-01.jpg" alt="Black Ops Shotgun" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">OD OPERATOR</div>
+          <div class="overlay-title">BLACK OPS SHOTGUN</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">OD Operator</div>
-          <div class="build-cat-badge">AR-15</div>
+          <div class="build-title">Black Ops Shotgun</div>
+          <div class="build-cat-badge" style="background:var(--dark-green);color:var(--cream)">SHOTGUN</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">16" Match Barrel</span>
-          <span class="build-spec-tag">OD Green Cerakote</span>
-          <span class="build-spec-tag">Enhanced Trigger</span>
-          <span class="build-spec-tag">Laser Engraved</span>
-        </div>
-        <div class="build-desc">Full custom AR-15 build with OD Green Cerakote finish, 16" match grade barrel, and custom laser engraving. Built for the operator who demands perfection.</div>
+        <div class="build-desc">Fully tactical pump shotgun build — Streamlight forend, folding stock, rail system. Ready for duty.</div>
         <div class="build-footer">
           <span class="build-num">BFC-001</span>
           <button class="build-view-btn" onclick="openLightbox(0)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 02 — FDE Precision -->
     <div class="build-card" data-cat="ar15" data-id="2">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔫</div>
-          <div class="ph-label">AR-15 // FDE</div>
-        </div>
+      <div class="build-card-bar" style="background:var(--od-green)"></div>
+      <div class="build-photo" onclick="openLightbox(1)">
+        <img src="gallery/build-02.jpg" alt="Precision AR Build" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">FDE SERIES</div>
+          <div class="overlay-title">PRECISION AR BUILD</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">FDE Precision</div>
-          <div class="build-cat-badge">AR-15</div>
+          <div class="build-title">Precision AR Build</div>
+          <div class="build-cat-badge" style="background:var(--od-green);color:var(--cream)">AR PLATFORM</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">18" Match Grade</span>
-          <span class="build-spec-tag">Flat Dark Earth</span>
-          <span class="build-spec-tag">Geissele Trigger</span>
-        </div>
-        <div class="build-desc">18" match grade barrel with FDE Cerakote, Geissele SSA trigger, and 15" M-LOK free-float handguard.</div>
+        <div class="build-desc">Custom AR with Vortex Diamondback scope, M-LOK handguard, bipod, and US flag lower engraving.</div>
         <div class="build-footer">
           <span class="build-num">BFC-002</span>
           <button class="build-view-btn" onclick="openLightbox(1)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 03 — Black Widow Pistol -->
-    <div class="build-card" data-cat="pistol" data-id="3">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔒</div>
-          <div class="ph-label">PISTOL // MATTE BLACK</div>
-        </div>
+    <div class="build-card" data-cat="ar15" data-id="3">
+      <div class="build-card-bar" style="background:var(--od-green)"></div>
+      <div class="build-photo" onclick="openLightbox(2)">
+        <img src="gallery/build-03.jpg" alt="AR Precision Rifle" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">BLACK WIDOW</div>
+          <div class="overlay-title">AR PRECISION RIFLE</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Black Widow</div>
-          <div class="build-cat-badge">PISTOL</div>
+          <div class="build-title">AR Precision Rifle</div>
+          <div class="build-cat-badge" style="background:var(--od-green);color:var(--cream)">AR PLATFORM</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">Glock 19</span>
-          <span class="build-spec-tag">Matte Black</span>
-          <span class="build-spec-tag">RMR Cut</span>
-          <span class="build-spec-tag">Threaded Barrel</span>
-        </div>
-        <div class="build-desc">Glock 19 custom build — matte black Cerakote, competition trigger, RMR optic cut, threaded barrel, and laser-engraved "BLACK WIDOW" on the slide.</div>
+        <div class="build-desc">Full-length precision AR with Vortex optic, free-float M-LOK handguard, and adjustable bipod.</div>
         <div class="build-footer">
           <span class="build-num">BFC-003</span>
           <button class="build-view-btn" onclick="openLightbox(2)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 04 — Eagle Engraving -->
     <div class="build-card" data-cat="engraving" data-id="4">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔆</div>
-          <div class="ph-label">LASER ENGRAVING</div>
-        </div>
+      <div class="build-card-bar" style="background:var(--gold)"></div>
+      <div class="build-photo" onclick="openLightbox(3)">
+        <img src="gallery/build-04.jpg" alt="1911 Flag Engraving" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">EAGLE CUSTOM</div>
-          <div class="overlay-cta">▶ VIEW WORK</div>
+          <div class="overlay-title">1911 FLAG ENGRAVING</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Eagle Custom</div>
-          <div class="build-cat-badge">ENGRAVING</div>
+          <div class="build-title">1911 Flag Engraving</div>
+          <div class="build-cat-badge" style="background:var(--gold);color:var(--ink)">ENGRAVING</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">1911 Platform</span>
-          <span class="build-spec-tag">Eagle Crest</span>
-          <span class="build-spec-tag">Fiber Laser</span>
-        </div>
-        <div class="build-desc">Custom eagle crest laser engraving on a 1911 — fiber laser precision with deep relief contrast. Custom unit crest and owner's name engraved on the slide.</div>
+        <div class="build-desc">Custom 1911 with fiber laser US flag and Spartan warrior engraved grips — deep relief, high contrast.</div>
         <div class="build-footer">
           <span class="build-num">BFC-004</span>
           <button class="build-view-btn" onclick="openLightbox(3)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 05 — Tungsten Wolf AR -->
-    <div class="build-card" data-cat="ar15" data-id="5">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔫</div>
-          <div class="ph-label">AR-15 // TUNGSTEN</div>
-        </div>
+    <div class="build-card" data-cat="cerakote" data-id="5">
+      <div class="build-card-bar" style="background:var(--red-bright)"></div>
+      <div class="build-photo" onclick="openLightbox(4)">
+        <img src="gallery/build-05.jpg" alt="Gold Desert Eagle" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">TUNGSTEN WOLF</div>
+          <div class="overlay-title">GOLD DESERT EAGLE</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Tungsten Wolf</div>
-          <div class="build-cat-badge">AR-15</div>
+          <div class="build-title">Gold Desert Eagle</div>
+          <div class="build-cat-badge" style="background:var(--red);color:var(--cream)">CERAKOTE</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">20" Heavy Profile</span>
-          <span class="build-spec-tag">Tungsten Cerakote</span>
-          <span class="build-spec-tag">LaRue MBT-2S</span>
-          <span class="build-spec-tag">Co-Witness Optic</span>
-        </div>
-        <div class="build-desc">Competition-grade AR-15 with 20" heavy profile barrel, tungsten Cerakote, LaRue MBT-2S trigger, and "FORGED TO WIN" laser engraving.</div>
+        <div class="build-desc">Desert Eagle .50AE in custom gold Cerakote with black grip contrast. Show-stopping finish.</div>
         <div class="build-footer">
           <span class="build-num">BFC-005</span>
           <button class="build-view-btn" onclick="openLightbox(4)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 06 — MultiCam AR10 -->
-    <div class="build-card featured" data-cat="cerakote" data-id="6">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🎨</div>
-          <div class="ph-label">CERAKOTE // MULTICAM</div>
-        </div>
+    <div class="build-card" data-cat="cerakote" data-id="6">
+      <div class="build-card-bar" style="background:var(--red-bright)"></div>
+      <div class="build-photo" onclick="openLightbox(5)">
+        <img src="gallery/build-06.jpg" alt="Orange Revolver" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">MULTICAM SERIES</div>
+          <div class="overlay-title">ORANGE REVOLVER</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">MultiCam Series</div>
-          <div class="build-cat-badge">CERAKOTE</div>
+          <div class="build-title">Orange Revolver</div>
+          <div class="build-cat-badge" style="background:var(--red);color:var(--cream)">CERAKOTE</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">AR-10 Platform</span>
-          <span class="build-spec-tag">MultiCam Pattern</span>
-          <span class="build-spec-tag">18" Match Barrel</span>
-          <span class="build-spec-tag">QD Muzzle Brake</span>
-        </div>
-        <div class="build-desc">Full MultiCam pattern Cerakote on an AR-10 — 5-color stencil process, 18" match barrel, enhanced trigger group, and QD muzzle brake installation.</div>
+        <div class="build-desc">S&W revolver in custom burnt orange Cerakote with black cylinder contrast — vibrant and durable.</div>
         <div class="build-footer">
           <span class="build-num">BFC-006</span>
           <button class="build-view-btn" onclick="openLightbox(5)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 07 — Midnight Carry Pistol -->
-    <div class="build-card" data-cat="pistol" data-id="7">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔒</div>
-          <div class="ph-label">PISTOL // MIDNIGHT BLUE</div>
-        </div>
+    <div class="build-card" data-cat="precision" data-id="7">
+      <div class="build-card-bar" style="background:#6a3a8f"></div>
+      <div class="build-photo" onclick="openLightbox(6)">
+        <img src="gallery/build-07.jpg" alt="Ruger Precision" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">MIDNIGHT CARRY</div>
+          <div class="overlay-title">RUGER PRECISION</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Midnight Carry</div>
-          <div class="build-cat-badge">PISTOL</div>
+          <div class="build-title">Ruger Precision</div>
+          <div class="build-cat-badge" style="background:#6a3a8f;color:var(--cream)">PRECISION</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">SIG P320</span>
-          <span class="build-spec-tag">Midnight Blue</span>
-          <span class="build-spec-tag">ROMEO1 Red Dot</span>
-        </div>
-        <div class="build-desc">SIG P320 compact carry build — midnight blue Cerakote, enhanced trigger, ROMEO1 red dot optic, and custom laser engraving on the grip module.</div>
+        <div class="build-desc">Ruger Precision Rifle with Vortex Diamondback scope, M-LOK chassis, bipod, and Magpul stock.</div>
         <div class="build-footer">
           <span class="build-num">BFC-007</span>
           <button class="build-view-btn" onclick="openLightbox(6)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 08 — Unit Crest Engraving -->
     <div class="build-card" data-cat="engraving" data-id="8">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔆</div>
-          <div class="ph-label">ENGRAVING // PRECISION RIFLE</div>
-        </div>
+      <div class="build-card-bar" style="background:var(--gold)"></div>
+      <div class="build-photo" onclick="openLightbox(7)">
+        <img src="gallery/build-08.jpg" alt="1911 Spartan Grips" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">UNIT CREST</div>
-          <div class="overlay-cta">▶ VIEW WORK</div>
+          <div class="overlay-title">1911 SPARTAN GRIPS</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Unit Crest</div>
-          <div class="build-cat-badge">ENGRAVING</div>
+          <div class="build-title">1911 Spartan Grips</div>
+          <div class="build-cat-badge" style="background:var(--gold);color:var(--ink)">ENGRAVING</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">Remington 700</span>
-          <span class="build-spec-tag">Coyote Brown</span>
-          <span class="build-spec-tag">Military Tribute</span>
-        </div>
-        <div class="build-desc">Remington 700 precision rifle with Coyote Brown Cerakote finish and custom military unit crest laser engraved on the action. 20 MOA rail installation included.</div>
+        <div class="build-desc">1911 with custom laser-engraved Spartan warrior scene on white grips — detailed custom artwork.</div>
         <div class="build-footer">
           <span class="build-num">BFC-008</span>
           <button class="build-view-btn" onclick="openLightbox(7)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 09 — Tactical Mossberg -->
-    <div class="build-card" data-cat="shotgun" data-id="9">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🎯</div>
-          <div class="ph-label">SHOTGUN // TACTICAL</div>
-        </div>
+    <div class="build-card" data-cat="engraving" data-id="9">
+      <div class="build-card-bar" style="background:var(--gold)"></div>
+      <div class="build-photo" onclick="openLightbox(8)">
+        <img src="gallery/build-09.jpg" alt="1911 Patriot" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">BREACHER</div>
+          <div class="overlay-title">1911 PATRIOT</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">The Breacher</div>
-          <div class="build-cat-badge">SHOTGUN</div>
+          <div class="build-title">1911 Patriot</div>
+          <div class="build-cat-badge" style="background:var(--gold);color:var(--ink)">ENGRAVING</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">Mossberg 590</span>
-          <span class="build-spec-tag">Matte Black</span>
-          <span class="build-spec-tag">M-LOK Forend</span>
-          <span class="build-spec-tag">Extended Mag</span>
-        </div>
-        <div class="build-desc">Mossberg 590 tactical build — matte black Cerakote, M-LOK tactical forend, extended magazine tube, and heat shield. Built for home defense or competition.</div>
+        <div class="build-desc">1911 with deep laser engraving — patriot-themed custom artwork, high detail on grips and slide.</div>
         <div class="build-footer">
           <span class="build-num">BFC-009</span>
           <button class="build-view-btn" onclick="openLightbox(8)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 10 — Crimson Tide Pistol -->
-    <div class="build-card" data-cat="pistol" data-id="10">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔒</div>
-          <div class="ph-label">PISTOL // CRIMSON RED</div>
-        </div>
+    <div class="build-card" data-cat="precision" data-id="10">
+      <div class="build-card-bar" style="background:#6a3a8f"></div>
+      <div class="build-photo" onclick="openLightbox(9)">
+        <img src="gallery/build-10.jpg" alt="Kimber Mirror Polish" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">CRIMSON TIDE</div>
+          <div class="overlay-title">KIMBER MIRROR POLISH</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Crimson Tide</div>
-          <div class="build-cat-badge">PISTOL</div>
+          <div class="build-title">Kimber Mirror Polish</div>
+          <div class="build-cat-badge" style="background:#6a3a8f;color:var(--cream)">PRECISION</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">1911 Platform</span>
-          <span class="build-spec-tag">Crimson Red</span>
-          <span class="build-spec-tag">Match Trigger</span>
-          <span class="build-spec-tag">Custom Grips</span>
-        </div>
-        <div class="build-desc">1911 full custom — crimson red Cerakote with polished flats, match trigger job, custom hardwood grips, and owner's initials laser engraved on the backstrap.</div>
+        <div class="build-desc">Kimber 1911 full mirror polish — stainless slide, ornate engraved grips, competition-ready trigger job.</div>
         <div class="build-footer">
           <span class="build-num">BFC-010</span>
           <button class="build-view-btn" onclick="openLightbox(9)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 11 — Ghost AR -->
-    <div class="build-card" data-cat="ar15" data-id="11">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🔫</div>
-          <div class="ph-label">AR-15 // STEALTH</div>
-        </div>
+    <div class="build-card" data-cat="cerakote" data-id="11">
+      <div class="build-card-bar" style="background:var(--red-bright)"></div>
+      <div class="build-photo" onclick="openLightbox(10)">
+        <img src="gallery/build-11.jpg" alt="M&P Two-Tone" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">GHOST OPERATOR</div>
+          <div class="overlay-title">M&P TWO-TONE</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Ghost Operator</div>
-          <div class="build-cat-badge">AR-15</div>
+          <div class="build-title">M&P Two-Tone</div>
+          <div class="build-cat-badge" style="background:var(--red);color:var(--cream)">CERAKOTE</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">14.5" Pinned</span>
-          <span class="build-spec-tag">Stealth Grey</span>
-          <span class="build-spec-tag">Geissele SSA-E</span>
-          <span class="build-spec-tag">Full BFC Build</span>
-        </div>
-        <div class="build-desc">Stealth grey Cerakote AR-15, 14.5" pinned barrel, Geissele SSA-E trigger, BCM stock, and MBUS sights. Full BFC custom ground-up build.</div>
+        <div class="build-desc">S&W M&P 9c in two-tone Cerakote — cobalt blue frame, polished silver slide. Sharp contrast finish.</div>
         <div class="build-footer">
           <span class="build-num">BFC-011</span>
           <button class="build-view-btn" onclick="openLightbox(10)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
-    <!-- BUILD 12 — Precision Hunter -->
-    <div class="build-card" data-cat="precision" data-id="12">
-      <div class="build-card-bar"></div>
-      <div class="build-photo">
-        <div class="build-photo-placeholder">
-          <div class="ph-icon">🎯</div>
-          <div class="ph-label">PRECISION // BOLT ACTION</div>
-        </div>
+    <div class="build-card" data-cat="cerakote" data-id="12">
+      <div class="build-card-bar" style="background:var(--red-bright)"></div>
+      <div class="build-photo" onclick="openLightbox(11)">
+        <img src="gallery/build-12.jpg" alt="M&P Blue Carry" loading="lazy">
         <div class="build-photo-overlay">
-          <div class="overlay-title">PRECISION HUNTER</div>
+          <div class="overlay-title">M&P BLUE CARRY</div>
           <div class="overlay-cta">▶ VIEW BUILD</div>
         </div>
       </div>
       <div class="build-body">
         <div class="build-header">
-          <div class="build-title">Precision Hunter</div>
-          <div class="build-cat-badge">PRECISION</div>
+          <div class="build-title">M&P Blue Carry</div>
+          <div class="build-cat-badge" style="background:var(--red);color:var(--cream)">CERAKOTE</div>
         </div>
-        <div class="build-specs">
-          <span class="build-spec-tag">Savage 110</span>
-          <span class="build-spec-tag">OD / Coyote Two-Tone</span>
-          <span class="build-spec-tag">Timney Trigger</span>
-          <span class="build-spec-tag">Chassis Stock</span>
-        </div>
-        <div class="build-desc">Savage 110 precision hunter — OD/Coyote two-tone Cerakote, Timney Elite Hunter trigger, chassis stock, and 20 MOA Picatinny rail. Sub-MOA performance guaranteed.</div>
+        <div class="build-desc">S&W M&P in custom cobalt blue Cerakote with stainless slide — compact carry build with custom color.</div>
         <div class="build-footer">
           <span class="build-num">BFC-012</span>
           <button class="build-view-btn" onclick="openLightbox(11)">▶ FULL SPECS</button>
         </div>
       </div>
     </div>
-
+    <div class="build-card" data-cat="cerakote" data-id="13">
+      <div class="build-card-bar" style="background:var(--red-bright)"></div>
+      <div class="build-photo" onclick="openLightbox(12)">
+        <img src="gallery/build-13.jpg" alt="Nintendo Zapper Glock" loading="lazy">
+        <div class="build-photo-overlay">
+          <div class="overlay-title">NINTENDO ZAPPER GLOCK</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Nintendo Zapper Glock</div>
+          <div class="build-cat-badge" style="background:var(--red);color:var(--cream)">CERAKOTE</div>
+        </div>
+        <div class="build-desc">Custom Glock in NES Nintendo Zapper Cerakote — grey/white/red with laser-engraved branding. Fan favorite.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-013</span>
+          <button class="build-view-btn" onclick="openLightbox(12)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+    <div class="build-card" data-cat="precision" data-id="14">
+      <div class="build-card-bar" style="background:#6a3a8f"></div>
+      <div class="build-photo" onclick="openLightbox(13)">
+        <img src="gallery/build-14.jpg" alt="Kimber Warrior" loading="lazy">
+        <div class="build-photo-overlay">
+          <div class="overlay-title">KIMBER WARRIOR</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Kimber Warrior</div>
+          <div class="build-cat-badge" style="background:#6a3a8f;color:var(--cream)">PRECISION</div>
+        </div>
+        <div class="build-desc">Kimber 1911 Warrior — dark finish with custom Spartan warrior artwork grips and precision trigger.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-014</span>
+          <button class="build-view-btn" onclick="openLightbox(13)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+    <div class="build-card" data-cat="cerakote" data-id="15">
+      <div class="build-card-bar" style="background:var(--red-bright)"></div>
+      <div class="build-photo" onclick="openLightbox(14)">
+        <img src="gallery/build-15.jpg" alt="Nintendo Zapper V2" loading="lazy">
+        <div class="build-photo-overlay">
+          <div class="overlay-title">NINTENDO ZAPPER V2</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Nintendo Zapper V2</div>
+          <div class="build-cat-badge" style="background:var(--red);color:var(--cream)">CERAKOTE</div>
+        </div>
+        <div class="build-desc">Updated Nintendo Zapper Glock — competition frame, purple anodized trigger, laser-engraved slide. Latest build.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-015</span>
+          <button class="build-view-btn" onclick="openLightbox(14)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+    <div class="build-card" data-cat="ar15" data-id="16">
+      <div class="build-card-bar" style="background:var(--od-green)"></div>
+      <div class="build-photo" onclick="openLightbox(15)">
+        <img src="gallery/build-16.jpg" alt="AR Pistol Build" loading="lazy">
+        <div class="build-photo-overlay">
+          <div class="overlay-title">AR PISTOL BUILD</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">AR Pistol Build</div>
+          <div class="build-cat-badge" style="background:var(--od-green);color:var(--cream)">AR PLATFORM</div>
+        </div>
+        <div class="build-desc">Short-barreled AR pistol with Vortex optic, M-LOK handguard, sling, and vertical grip. Canton-built.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-016</span>
+          <button class="build-view-btn" onclick="openLightbox(15)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+    <div class="build-card" data-cat="ar15" data-id="17">
+      <div class="build-card-bar" style="background:var(--od-green)"></div>
+      <div class="build-photo" onclick="openLightbox(16)">
+        <img src="gallery/build-17.jpg" alt="Ruger AR-556" loading="lazy">
+        <div class="build-photo-overlay">
+          <div class="overlay-title">RUGER AR-556</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Ruger AR-556</div>
+          <div class="build-cat-badge" style="background:var(--od-green);color:var(--cream)">AR PLATFORM</div>
+        </div>
+        <div class="build-desc">Ruger AR-556 custom build — Diamondback scope, M-LOK handguard, Magpul stock, bipod. Full BFC tune.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-017</span>
+          <button class="build-view-btn" onclick="openLightbox(16)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
+    <div class="build-card" data-cat="ar15" data-id="18">
+      <div class="build-card-bar" style="background:var(--od-green)"></div>
+      <div class="build-photo" onclick="openLightbox(17)">
+        <img src="gallery/build-18.jpg" alt="Tactical AR Pistol" loading="lazy">
+        <div class="build-photo-overlay">
+          <div class="overlay-title">TACTICAL AR PISTOL</div>
+          <div class="overlay-cta">▶ VIEW BUILD</div>
+        </div>
+      </div>
+      <div class="build-body">
+        <div class="build-header">
+          <div class="build-title">Tactical AR Pistol</div>
+          <div class="build-cat-badge" style="background:var(--od-green);color:var(--cream)">AR PLATFORM</div>
+        </div>
+        <div class="build-desc">Tactical AR pistol with red dot, magnifier, M-LOK handguard, brace, and vertical foregrip. Mission ready.</div>
+        <div class="build-footer">
+          <span class="build-num">BFC-018</span>
+          <button class="build-view-btn" onclick="openLightbox(17)">▶ FULL SPECS</button>
+        </div>
+      </div>
+    </div>
   </div><!-- /build-grid -->
 </div><!-- /gallery-main -->
 
@@ -1062,8 +1060,8 @@ footer {
         <button class="lb-nav-btn" onclick="lbNav(-1)">◀</button>
         <button class="lb-nav-btn" onclick="lbNav(1)">▶</button>
       </div>
+      <img id="lb-photo" src="" alt="" style="width:100%;max-height:460px;object-fit:contain;position:relative;z-index:1;display:none;">
       <div class="lb-placeholder-wrap" id="lb-placeholder">
-        <div class="lb-placeholder-icon" id="lb-icon">🔫</div>
         <div class="lb-placeholder-name" id="lb-name">BUILD NAME</div>
         <div class="lb-placeholder-sub" id="lb-sub">SPEC DETAILS</div>
       </div>
@@ -1098,42 +1096,60 @@ footer {
 <script>
 // ── BUILD DATA ───────────────────────────────────────
 const builds = [
-  { id:1, name:'OD Operator', cat:'ar15', icon:'🔫', sub:'AR-15 Custom Build · OD Green Cerakote',
-    platform:'AR-15', barrel:'16" Match Grade', finish:'OD Green Cerakote', trigger:'Enhanced Combat',
-    engrave:'OPERATOR', optics:'Co-Witness', muzzle:'A2 Flash Hider', time:'2 weeks', status:'COMPLETED' },
-  { id:2, name:'FDE Precision', cat:'ar15', icon:'🔫', sub:'AR-15 · Flat Dark Earth',
-    platform:'AR-15', barrel:'18" Match Grade', finish:'Flat Dark Earth', trigger:'Geissele SSA',
-    engrave:'None', optics:'20 MOA Rail', muzzle:'Surefire MB', time:'2.5 weeks', status:'COMPLETED' },
-  { id:3, name:'Black Widow', cat:'pistol', icon:'🔒', sub:'Glock 19 Custom · Matte Black',
-    platform:'Glock 19', barrel:'4.5" Threaded', finish:'Matte Black', trigger:'Competition',
-    engrave:'BLACK WIDOW', optics:'RMR Cut', muzzle:'Dead Air Comp', time:'10 days', status:'COMPLETED' },
-  { id:4, name:'Eagle Custom', cat:'engraving', icon:'🔆', sub:'1911 · Fiber Laser Engraving',
-    platform:'1911 Platform', barrel:'5" Standard', finish:'Polished Black', trigger:'Match',
-    engrave:'Eagle Crest + Name', optics:'None', muzzle:'Standard', time:'3 days', status:'COMPLETED' },
-  { id:5, name:'Tungsten Wolf', cat:'ar15', icon:'🔫', sub:'AR-15 Competition · Tungsten',
-    platform:'AR-15', barrel:'20" Heavy Profile', finish:'Tungsten Cerakote', trigger:'LaRue MBT-2S',
-    engrave:'FORGED TO WIN', optics:'Co-Witness', muzzle:'Competition Brake', time:'3 weeks', status:'COMPLETED' },
-  { id:6, name:'MultiCam Series', cat:'cerakote', icon:'🎨', sub:'AR-10 · MultiCam Pattern Cerakote',
-    platform:'AR-10', barrel:'18" Match', finish:'5-Color MultiCam', trigger:'Enhanced',
-    engrave:'None', optics:'Included', muzzle:'QD Brake', time:'3 weeks', status:'COMPLETED' },
-  { id:7, name:'Midnight Carry', cat:'pistol', icon:'🔒', sub:'SIG P320 · Midnight Blue',
-    platform:'SIG P320 Compact', barrel:'3.9" Standard', finish:'Midnight Blue', trigger:'Enhanced',
-    engrave:'MIDNIGHT', optics:'ROMEO1 Pro', muzzle:'Standard', time:'1 week', status:'COMPLETED' },
-  { id:8, name:'Unit Crest', cat:'engraving', icon:'🔆', sub:'Remington 700 · Military Tribute',
-    platform:'Remington 700', barrel:'24" Precision', finish:'Coyote Brown', trigger:'Timney',
-    engrave:'Unit Crest', optics:'20 MOA Rail', muzzle:'Muzzle Brake', time:'2 weeks', status:'COMPLETED' },
-  { id:9, name:'The Breacher', cat:'shotgun', icon:'🎯', sub:'Mossberg 590 · Tactical Build',
-    platform:'Mossberg 590', barrel:'18.5" Cylinder', finish:'Matte Black', trigger:'Standard',
-    engrave:'None', optics:'Ghost Ring Sights', muzzle:'Breacher Device', time:'1 week', status:'COMPLETED' },
-  { id:10, name:'Crimson Tide', cat:'pistol', icon:'🔒', sub:'1911 · Crimson Red Cerakote',
-    platform:'1911 Platform', barrel:'5" Match', finish:'Crimson Red + Polished', trigger:'Match Job',
-    engrave:'Owner Initials', optics:'Night Sights', muzzle:'Standard', time:'2 weeks', status:'COMPLETED' },
-  { id:11, name:'Ghost Operator', cat:'ar15', icon:'🔫', sub:'AR-15 Stealth Build · Grey',
-    platform:'AR-15', barrel:'14.5" Pinned', finish:'Stealth Grey', trigger:'Geissele SSA-E',
-    engrave:'None', optics:'MBUS Sights', muzzle:'Pinned Comp', time:'2.5 weeks', status:'COMPLETED' },
-  { id:12, name:'Precision Hunter', cat:'precision', icon:'🎯', sub:'Savage 110 · Two-Tone Cerakote',
-    platform:'Savage 110', barrel:'24" Heavy', finish:'OD/Coyote Two-Tone', trigger:'Timney Elite',
-    engrave:'None', optics:'20 MOA Rail', muzzle:'Muzzle Brake', time:'2 weeks', status:'COMPLETED' },
+  { id:1, name:"Black Ops Shotgun", cat:"shotgun", photo:"gallery/build-01.jpg", sub:"Pump Shotgun · Matte Black",
+    platform:"Pump Shotgun", barrel:"Folding Stock", finish:"Matte Black", trigger:"Standard",
+    engrave:"Streamlight Forend", optics:"Installed", muzzle:"Installed", time:"3 days", status:"COMPLETED", filenum:"BFC-001" },
+  { id:2, name:"Precision AR Build", cat:"ar15", photo:"gallery/build-02.jpg", sub:"AR-15 · Matte Black",
+    platform:"AR-15", barrel:"Bipod + M-LOK", finish:"Matte Black", trigger:"Enhanced",
+    engrave:"Vortex Diamondback", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-002" },
+  { id:3, name:"AR Precision Rifle", cat:"ar15", photo:"gallery/build-03.jpg", sub:"AR-15 · Matte Black",
+    platform:"AR-15", barrel:"Free-Float M-LOK", finish:"Matte Black", trigger:"Enhanced",
+    engrave:"Vortex Scope", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-003" },
+  { id:4, name:"1911 Flag Engraving", cat:"engraving", photo:"gallery/build-04.jpg", sub:"1911 Platform · Matte Black",
+    platform:"1911 Platform", barrel:"Custom Grips", finish:"Matte Black", trigger:"Match",
+    engrave:"Flag + Spartan Art", optics:"Installed", muzzle:"Installed", time:"4 days", status:"COMPLETED", filenum:"BFC-004" },
+  { id:5, name:"Gold Desert Eagle", cat:"cerakote", photo:"gallery/build-05.jpg", sub:"Desert Eagle .50AE · Gold Cerakote",
+    platform:"Desert Eagle .50AE", barrel:"Mirror Accents", finish:"Gold Cerakote", trigger:"Factory",
+    engrave:"Black Grips", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-005" },
+  { id:6, name:"Orange Revolver", cat:"cerakote", photo:"gallery/build-06.jpg", sub:"S&W Revolver · Burnt Orange Cerakote",
+    platform:"S&W Revolver", barrel:"Custom Color", finish:"Burnt Orange Cerakote", trigger:"Standard",
+    engrave:"Black Cylinder", optics:"Installed", muzzle:"Installed", time:"4 days", status:"COMPLETED", filenum:"BFC-006" },
+  { id:7, name:"Ruger Precision", cat:"precision", photo:"gallery/build-07.jpg", sub:"Ruger Precision · Matte Black",
+    platform:"Ruger Precision", barrel:"Chassis + Bipod", finish:"Matte Black", trigger:"Timney",
+    engrave:"Vortex Diamondback", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-007" },
+  { id:8, name:"1911 Spartan Grips", cat:"engraving", photo:"gallery/build-08.jpg", sub:"1911 Platform · Matte Black",
+    platform:"1911 Platform", barrel:"White Grip Engraving", finish:"Matte Black", trigger:"Match",
+    engrave:"Spartan Artwork", optics:"Installed", muzzle:"Installed", time:"5 days", status:"COMPLETED", filenum:"BFC-008" },
+  { id:9, name:"1911 Patriot", cat:"engraving", photo:"gallery/build-09.jpg", sub:"1911 Platform · Matte Black",
+    platform:"1911 Platform", barrel:"Laser Engraved", finish:"Matte Black", trigger:"Match",
+    engrave:"Patriot Theme", optics:"Installed", muzzle:"Installed", time:"4 days", status:"COMPLETED", filenum:"BFC-009" },
+  { id:10, name:"Kimber Mirror Polish", cat:"precision", photo:"gallery/build-10.jpg", sub:"Kimber 1911 · Mirror Polish",
+    platform:"Kimber 1911", barrel:"Competition Trigger", finish:"Mirror Polish", trigger:"Kimber",
+    engrave:"Ornate Grips", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-010" },
+  { id:11, name:"M&P Two-Tone", cat:"cerakote", photo:"gallery/build-11.jpg", sub:"S&W M&P 9c · Cobalt Blue/Silver",
+    platform:"S&W M&P 9c", barrel:"Carry Build", finish:"Cobalt Blue/Silver", trigger:"Enhanced",
+    engrave:"Two-Tone", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-011" },
+  { id:12, name:"M&P Blue Carry", cat:"cerakote", photo:"gallery/build-12.jpg", sub:"S&W M&P · Cobalt Blue",
+    platform:"S&W M&P", barrel:"Carry Build", finish:"Cobalt Blue", trigger:"Enhanced",
+    engrave:"Silver Slide", optics:"Installed", muzzle:"Installed", time:"5 days", status:"COMPLETED", filenum:"BFC-012" },
+  { id:13, name:"Nintendo Zapper Glock", cat:"cerakote", photo:"gallery/build-13.jpg", sub:"Glock Platform · NES Grey/White/Red",
+    platform:"Glock Platform", barrel:"Laser Engraved", finish:"NES Grey/White/Red", trigger:"Competition",
+    engrave:"Nintendo Zapper", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-013" },
+  { id:14, name:"Kimber Warrior", cat:"precision", photo:"gallery/build-14.jpg", sub:"Kimber 1911 · Dark Finish",
+    platform:"Kimber 1911", barrel:"Precision Trigger", finish:"Dark Finish", trigger:"Kimber",
+    engrave:"Spartan Warrior", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-014" },
+  { id:15, name:"Nintendo Zapper V2", cat:"cerakote", photo:"gallery/build-15.jpg", sub:"Glock Competition · NES Grey/Black",
+    platform:"Glock Competition", barrel:"Laser Engraved", finish:"NES Grey/Black", trigger:"Competition",
+    engrave:"Purple Trigger", optics:"Installed", muzzle:"Installed", time:"1 week", status:"COMPLETED", filenum:"BFC-015" },
+  { id:16, name:"AR Pistol Build", cat:"ar15", photo:"gallery/build-16.jpg", sub:"AR Pistol · Matte Black",
+    platform:"AR Pistol", barrel:"M-LOK + Sling", finish:"Matte Black", trigger:"Enhanced",
+    engrave:"Vortex Optic", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-016" },
+  { id:17, name:"Ruger AR-556", cat:"ar15", photo:"gallery/build-17.jpg", sub:"Ruger AR-556 · Matte Black",
+    platform:"Ruger AR-556", barrel:"Magpul + Bipod", finish:"Matte Black", trigger:"Enhanced",
+    engrave:"Diamondback Scope", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-017" },
+  { id:18, name:"Tactical AR Pistol", cat:"ar15", photo:"gallery/build-18.jpg", sub:"AR Pistol · Matte Black",
+    platform:"AR Pistol", barrel:"Brace + VFG", finish:"Matte Black", trigger:"Enhanced",
+    engrave:"Red Dot + Magnifier", optics:"Installed", muzzle:"Installed", time:"2 weeks", status:"COMPLETED", filenum:"BFC-018" },
 ];
 
 let currentLbIdx = 0;
@@ -1174,15 +1190,26 @@ function openLightbox(idx) {
 }
 
 function populateLb(b) {
-  document.getElementById('lb-title').textContent = '// BUILD FILE: ' + b.name.toUpperCase() + ' — BFC-00' + b.id;
-  document.getElementById('lb-icon').textContent = b.icon;
+  document.getElementById('lb-title').textContent = '// BUILD FILE: ' + b.name.toUpperCase() + ' — ' + b.filenum;
+  // Show photo if available
+  const photo = document.getElementById('lb-photo');
+  const placeholder = document.getElementById('lb-placeholder');
+  if (b.photo) {
+    photo.src = b.photo;
+    photo.alt = b.name;
+    photo.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    photo.style.display = 'none';
+    placeholder.style.display = 'flex';
+  }
   document.getElementById('lb-name').textContent = b.name.toUpperCase();
   document.getElementById('lb-sub').textContent = b.sub.toUpperCase();
   document.getElementById('lb-platform').textContent = b.platform;
   document.getElementById('lb-barrel').textContent = b.barrel;
   document.getElementById('lb-finish').textContent = b.finish;
   document.getElementById('lb-trigger').textContent = b.trigger;
-  document.getElementById('lb-filenum').textContent = 'BFC-00' + b.id;
+  document.getElementById('lb-filenum').textContent = b.filenum;
   document.getElementById('lb-engrave').textContent = b.engrave;
   document.getElementById('lb-optics').textContent = b.optics;
   document.getElementById('lb-muzzle').textContent = b.muzzle;
