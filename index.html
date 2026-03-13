@@ -1479,111 +1479,275 @@ footer {
 <section class="shop-section" id="shop">
   <div class="section-wrap">
     <div class="section-header">
-      <span class="section-eyebrow">▶ Armory Store</span>
-      <h2>BFC GEAR SHOP</h2>
-      <span class="sub" style="color:var(--tan)">Merch · Accessories · Service Packages</span>
+      <span class="section-eyebrow">▶ Rates & Service Packages</span>
+      <h2>ARMORY PRICING</h2>
+      <span class="sub" style="color:var(--tan)">Transparent Pricing · No Surprises · Free Consultation</span>
       <div class="ink-rule"><span class="ink-rule-star">★</span></div>
     </div>
 
-    <!-- SHOPIFY SETUP NOTICE — remove once connected -->
-    <div class="shopify-setup-notice" id="shopify-notice">
-      <div class="icon">🛒</div>
-      <div>
-        <h4>CONNECT YOUR SHOPIFY STORE</h4>
-        <p>Replace the <code>YOUR_SHOPIFY_DOMAIN</code> and <code>STOREFRONT_TOKEN</code> placeholders below with your Shopify credentials, and swap in your real product IDs. Get these from your Shopify Admin → Apps → Storefront API.</p>
+    <!-- SHOP RATES BANNER -->
+    <div style="background:var(--gold-light);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:16px 24px;margin-bottom:32px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;justify-content:center;position:relative;z-index:1;">
+      <div style="text-align:center;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--od-green);letter-spacing:3px;display:block;text-transform:uppercase;">Shop Minimum</span>
+        <span style="font-family:'Bangers',cursive;font-size:32px;color:var(--ink);text-shadow:2px 2px 0 rgba(0,0,0,0.15);letter-spacing:2px;">$40</span>
+      </div>
+      <div style="width:3px;height:50px;background:var(--ink);opacity:0.2;"></div>
+      <div style="text-align:center;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--od-green);letter-spacing:3px;display:block;text-transform:uppercase;">Labor Rate</span>
+        <span style="font-family:'Bangers',cursive;font-size:32px;color:var(--ink);text-shadow:2px 2px 0 rgba(0,0,0,0.15);letter-spacing:2px;">$90/hr</span>
+      </div>
+      <div style="width:3px;height:50px;background:var(--ink);opacity:0.2;"></div>
+      <div style="text-align:center;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--od-green);letter-spacing:3px;display:block;text-transform:uppercase;">Laser Time</span>
+        <span style="font-family:'Bangers',cursive;font-size:32px;color:var(--ink);text-shadow:2px 2px 0 rgba(0,0,0,0.15);letter-spacing:2px;">$100/hr</span>
+      </div>
+      <div style="width:3px;height:50px;background:var(--ink);opacity:0.2;"></div>
+      <div style="text-align:center;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--od-green);letter-spacing:3px;display:block;text-transform:uppercase;">Consultation</span>
+        <span style="font-family:'Bangers',cursive;font-size:32px;color:var(--od-green);text-shadow:2px 2px 0 rgba(0,0,0,0.15);letter-spacing:2px;">FREE</span>
       </div>
     </div>
 
-    <div class="shopify-grid" id="shopify-grid">
+    <!-- SERVICE PACKAGES — TOP TIER -->
+    <div style="margin-bottom:16px;position:relative;z-index:1;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:5px;text-transform:uppercase;display:block;margin-bottom:16px;">▶ BFC Service Packages</span>
+    </div>
+    <div class="shopify-grid" id="shopify-grid" style="margin-bottom:40px;">
 
-      <!-- PRODUCT 1 — Cerakote Service Package -->
+      <!-- BATTLE READY PACKAGE -->
       <div class="product-card">
         <div class="product-header">
           <span class="product-brand">BFC</span>
-          <span class="product-category">Service Package</span>
+          <span class="product-category">Package Deal</span>
         </div>
-        <div class="product-bubble">
-          <div class="product-icon">🎨</div>
+        <div class="product-bubble" style="background:linear-gradient(160deg,#1a2e0e,#0d1808);">
+          <div class="product-icon">🛡️</div>
         </div>
         <div class="product-body">
-          <div class="product-title">Cerakote Package</div>
-          <div class="product-desc">Full Cerakote finish — any color, any pattern. Military-grade ceramic polymer coating. Drop off at Canton HQ.</div>
+          <div class="product-title">Battle Ready</div>
+          <div class="product-desc">
+            ✔ Slide engraving<br>
+            ✔ Cerakote slide finish<br>
+            ✔ Trigger tuning<br>
+            ✔ Reliability inspection
+          </div>
           <div class="product-price-row">
-            <span class="product-price">$199</span>
+            <span class="product-price" style="color:var(--od-green);">$395</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-1">
-            <!-- Shopify Buy Button loads here. Fallback below: -->
-            <a href="#contact" class="comic-buy-btn green-btn">▶ BOOK SERVICE</a>
+            <a href="#contact" class="comic-buy-btn green-btn">▶ BOOK THIS PACKAGE</a>
           </div>
         </div>
       </div>
 
-      <!-- PRODUCT 2 — Laser Engraving -->
+      <!-- WARFIGHTER PACKAGE -->
       <div class="product-card">
         <div class="product-header">
           <span class="product-brand">BFC</span>
-          <span class="product-category">Laser Engraving</span>
+          <span class="product-category">Package Deal</span>
         </div>
-        <div class="product-bubble">
+        <div class="product-bubble" style="background:linear-gradient(160deg,#0d1a3a,#060e22);">
           <div class="product-sale-badge">POPULAR</div>
-          <div class="product-icon">🔆</div>
+          <div class="product-icon">⚔️</div>
         </div>
         <div class="product-body">
-          <div class="product-title">Fiber Laser Engraving</div>
-          <div class="product-desc">Custom text, logos, or serial numbers. Permanent fiber laser precision on any firearm surface.</div>
+          <div class="product-title">Warfighter</div>
+          <div class="product-desc">
+            ✔ Complete firearm Cerakote<br>
+            ✔ Custom laser engraving<br>
+            ✔ Precision tuning<br>
+            ✔ Internal action polish
+          </div>
           <div class="product-price-row">
-            <span class="product-price">$75</span>
+            <span class="product-price" style="color:var(--cobalt);">$595</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-2">
-            <a href="#contact" class="comic-buy-btn">▶ ORDER NOW</a>
+            <a href="#contact" class="comic-buy-btn">▶ BOOK THIS PACKAGE</a>
           </div>
         </div>
       </div>
 
-      <!-- PRODUCT 3 — Full Custom Build -->
+      <!-- ELITE OPERATOR PACKAGE -->
+      <div class="product-card">
+        <div class="product-header">
+          <span class="product-brand">BFC</span>
+          <span class="product-category">Package Deal</span>
+        </div>
+        <div class="product-bubble" style="background:linear-gradient(160deg,#3a0a0a,#220606);">
+          <div class="product-sale-badge">FLAGSHIP</div>
+          <div class="product-icon">🎖️</div>
+        </div>
+        <div class="product-body">
+          <div class="product-title">Elite Operator</div>
+          <div class="product-desc">
+            ✔ Multi-color Cerakote camo<br>
+            ✔ Deep laser engraving<br>
+            ✔ Competition trigger tuning<br>
+            ✔ Action polishing + full inspection
+          </div>
+          <div class="product-price-row">
+            <span class="product-price" style="color:var(--red);">$895</span>
+          </div>
+          <div class="shopify-btn-zone" id="shopify-btn-3">
+            <a href="#contact" class="comic-buy-btn red-btn">▶ BOOK THIS PACKAGE</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOM BUILD -->
       <div class="product-card">
         <div class="product-header">
           <span class="product-brand">BFC</span>
           <span class="product-category">Custom Build</span>
         </div>
-        <div class="product-bubble">
-          <div class="product-sale-badge">FLAGSHIP</div>
+        <div class="product-bubble" style="background:linear-gradient(160deg,#1a1a0e,#0d0c08);">
           <div class="product-icon">🔫</div>
         </div>
         <div class="product-body">
-          <div class="product-title">Full Custom Build</div>
-          <div class="product-desc">Complete ground-up AR build. You spec it, we build it. Cerakote + engraving packages available.</div>
+          <div class="product-title">Custom AR Build</div>
+          <div class="product-desc">Ground-up custom AR build. You spec it, we forge it. Cerakote + engraving available. Consultation included.</div>
           <div class="product-price-row">
-            <span class="product-price">QUOTE</span>
-          </div>
-          <div class="shopify-btn-zone" id="shopify-btn-3">
-            <a href="#contact" class="comic-buy-btn red-btn">▶ GET A QUOTE</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCT 4 — BFC Merch -->
-      <div class="product-card">
-        <div class="product-header">
-          <span class="product-brand">BFC</span>
-          <span class="product-category">Merch</span>
-        </div>
-        <div class="product-bubble">
-          <div class="product-icon">🧢</div>
-        </div>
-        <div class="product-body">
-          <div class="product-title">BFC Gear</div>
-          <div class="product-desc">Hats, shirts, and patches. Rep the Battle Forged brand. Veteran-designed, Canton-built.</div>
-          <div class="product-price-row">
-            <span class="product-price">$25+</span>
+            <span class="product-price" style="font-size:22px;">FROM $600</span>
           </div>
           <div class="shopify-btn-zone" id="shopify-btn-4">
-            <a href="#contact" class="comic-buy-btn">▶ SHOP MERCH</a>
+            <a href="#contact" class="comic-buy-btn">▶ GET A QUOTE</a>
           </div>
         </div>
       </div>
 
     </div>
+
+    <!-- PRICING TABLES -->
+    <div style="position:relative;z-index:1;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:5px;text-transform:uppercase;display:block;margin-bottom:20px;">▶ Full Service Rate Sheet</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;position:relative;z-index:1;">
+
+      <!-- CERAKOTE -->
+      <div style="background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);overflow:hidden;">
+        <div style="background:var(--od-green);border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">🎨</span>
+          <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--gold-light);letter-spacing:3px;text-shadow:2px 2px 0 var(--ink);">Cerakote Finishing</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <div style="font-family:'Oswald',sans-serif;font-size:12px;color:#555;margin-bottom:10px;letter-spacing:1px;">Superior durability & corrosion resistance.</div>
+          ${[
+            ['Pistol Slide','$95'],['Pistol Frame','$95'],['Complete Handgun (1 Color)','$200'],
+            ['Complete Handgun (2 Colors)','$250'],['Complete Handgun (Camo)','$300'],
+            ['AR Upper Receiver','$120'],['AR Lower Receiver','$120'],
+            ['Complete AR (Single Color)','$300'],['Complete AR (Multi/Camo)','$350–$450'],
+            ['Bolt-Action Rifle','$275'],['Battle-Worn Finish','+$75'],['Custom Pattern/Stencil','+$100'],
+          ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.1);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:#444;">${s}</span><span style="font-weight:700;color:var(--od-green);letter-spacing:1px;">${p}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- LASER ENGRAVING -->
+      <div style="background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);overflow:hidden;">
+        <div style="background:var(--cobalt);border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">🔆</span>
+          <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--gold-light);letter-spacing:3px;text-shadow:2px 2px 0 var(--ink);">Fiber Laser Engraving</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <div style="font-family:'Oswald',sans-serif;font-size:12px;color:#555;margin-bottom:10px;letter-spacing:1px;">Steel, aluminum, titanium & coated surfaces.</div>
+          ${[
+            ['Simple Text / Serial Marking','$40'],['NFA Trust Engraving','$65'],
+            ['Small Logo Engraving','$75'],['Large Logo Engraving','$100'],
+            ['Deep Engraving','$125'],['Custom Artwork Engraving','$150+'],
+            ['Full Slide Engraving','$200+'],
+          ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.1);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:#444;">${s}</span><span style="font-weight:700;color:var(--cobalt);letter-spacing:1px;">${p}</span></div>`).join('')}
+          <div style="margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--od-green);letter-spacing:2px;">COMMON: logos · military insignia · NFA trust · artwork · challenge coins</div>
+        </div>
+      </div>
+
+      <!-- PRECISION TUNING -->
+      <div style="background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);overflow:hidden;">
+        <div style="background:#4a2a7a;border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">⚙️</span>
+          <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--gold-light);letter-spacing:3px;text-shadow:2px 2px 0 var(--ink);">Precision Tuning</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <div style="font-family:'Oswald',sans-serif;font-size:12px;color:#555;margin-bottom:10px;letter-spacing:1px;">Enhanced reliability, trigger feel & performance.</div>
+          ${[
+            ['Trigger Job (AR or Pistol)','$120'],['Bolt-Action Trigger Job','$150'],
+            ['Action Tune & Reliability Package','$200'],['Competition Tune Package','$250'],
+            ['Complete Firearm Inspection','$75'],
+          ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.1);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:#444;">${s}</span><span style="font-weight:700;color:#4a2a7a;letter-spacing:1px;">${p}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- POLISHING -->
+      <div style="background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);overflow:hidden;">
+        <div style="background:#8a6a00;border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">✨</span>
+          <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--gold-light);letter-spacing:3px;text-shadow:2px 2px 0 var(--ink);">Polishing & Finishing</span>
+        </div>
+        <div style="padding:14px 16px;">
+          <div style="font-family:'Oswald',sans-serif;font-size:12px;color:#555;margin-bottom:10px;letter-spacing:1px;">Improves appearance & mechanical performance.</div>
+          ${[
+            ['Feed Ramp Polish','$75'],['Slide Polish','$125'],
+            ['Complete Slide Mirror Polish','$150'],['1911 Full Polish Package','$250'],
+            ['Internal Action Polish','$150'],['Competition Polish Package','$300'],
+          ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.1);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:#444;">${s}</span><span style="font-weight:700;color:#8a6a00;letter-spacing:1px;">${p}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- OPTICS & ACCESSORIES -->
+      <div style="background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);overflow:hidden;">
+        <div style="background:var(--red);border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">🔭</span>
+          <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--gold-light);letter-spacing:3px;text-shadow:2px 2px 0 var(--ink);">Optics & Accessories</span>
+        </div>
+        <div style="padding:14px 16px;">
+          ${[
+            ['Scope Mounting','$60'],['Scope Mount & Bore Sight','$80'],
+            ['Optic Zeroing','$100'],['Rail Installation','$75'],['Accessory Mounting','$40'],
+          ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.1);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:#444;">${s}</span><span style="font-weight:700;color:var(--red);letter-spacing:1px;">${p}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- AR PLATFORM -->
+      <div style="background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);overflow:hidden;">
+        <div style="background:var(--dark-green);border-bottom:3px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">🔫</span>
+          <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--gold-light);letter-spacing:3px;text-shadow:2px 2px 0 var(--ink);">AR Platform Services</span>
+        </div>
+        <div style="padding:14px 16px;">
+          ${[
+            ['AR Upper Assembly','$120'],['Complete AR Build (Customer Parts)','$200'],
+            ['Premium AR Build & Tune','$350'],['Pin & Weld Muzzle Device','$150'],['Barrel Installation','$150'],
+          ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.1);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:#444;">${s}</span><span style="font-weight:700;color:var(--dark-green);letter-spacing:1px;">${p}</span></div>`).join('')}
+          <div style="margin-top:14px;background:var(--od-green);border:2px solid var(--ink);padding:10px 12px;">
+            <div style="font-family:'Bangers',cursive;font-size:14px;color:var(--gold-light);letter-spacing:3px;text-shadow:1px 1px 0 var(--ink);margin-bottom:6px;">CUSTOM BUILDS</div>
+            ${[
+              ['Custom AR Build','from $600'],['Precision Rifle Build','from $800'],
+              ['Competition Rifle Build','from $1,200'],['Full Custom Package','from $1,500'],
+            ].map(([s,p])=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed rgba(255,255,255,0.15);font-family:'Oswald',sans-serif;font-size:12px;"><span style="color:rgba(245,230,200,0.85);">${s}</span><span style="font-weight:700;color:var(--gold-light);letter-spacing:1px;">${p}</span></div>`).join('')}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MERCH ROW -->
+    <div style="margin-top:24px;background:var(--cream);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:16px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;position:relative;z-index:1;">
+      <span style="font-family:'Bangers',cursive;font-size:22px;color:var(--ink);letter-spacing:3px;text-shadow:1px 1px 0 var(--gold);">BFC MERCH:</span>
+      ${[['Challenge Coins','$25'],['Custom Engraved Coins','$40'],['Engraved Magazines','$35'],['Stickers','$5']].map(([s,p])=>`
+        <div style="text-align:center;background:var(--od-green);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);padding:8px 14px;">
+          <span style="font-family:'Bangers',cursive;font-size:18px;color:var(--gold-light);display:block;letter-spacing:2px;text-shadow:1px 1px 0 var(--ink);">${p}</span>
+          <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(245,230,200,0.7);letter-spacing:2px;">${s.toUpperCase()}</span>
+        </div>`).join('')}
+      <a href="#contact" class="comic-buy-btn" style="margin-left:auto;">▶ ORDER NOW</a>
+    </div>
+
+    <!-- POLICIES NOTE -->
+    <div style="margin-top:16px;background:rgba(245,200,66,0.12);border:2px solid var(--gold);padding:12px 18px;position:relative;z-index:1;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:4px;display:block;margin-bottom:6px;">// SERVICE POLICIES</span>
+      <span style="font-family:'Oswald',sans-serif;font-size:12px;color:var(--tan);letter-spacing:1px;line-height:1.8;">
+        All firearms must be unloaded when presented for service &nbsp;·&nbsp; 50% deposit required for custom work &nbsp;·&nbsp; NFA engraving complies with all ATF requirements &nbsp;·&nbsp; Customer-supplied parts installed at owner risk &nbsp;·&nbsp; All workmanship backed by Battle Forged craftsmanship guarantee
+      </span>
+    </div>
+
   </div>
 </section>
 
@@ -1701,11 +1865,25 @@ footer {
             <label>// Mission Type</label>
             <select>
               <option>Select service...</option>
-              <option>Custom Build</option>
-              <option>Cerakote Finish</option>
-              <option>Laser Engraving</option>
-              <option>Precision Tuning</option>
-              <option>Full Overhaul</option>
+              <option>Battle Ready Package — $395</option>
+              <option>Warfighter Package — $595</option>
+              <option>Elite Operator Package — $895</option>
+              <option>Cerakote — Pistol ($95–$300)</option>
+              <option>Cerakote — AR Rifle ($300–$450)</option>
+              <option>Cerakote — Bolt-Action ($275)</option>
+              <option>Fiber Laser Engraving ($40–$200+)</option>
+              <option>NFA Trust Engraving — $65</option>
+              <option>Trigger Job — $120–$150</option>
+              <option>Action Tune & Reliability — $200</option>
+              <option>Competition Tune — $250</option>
+              <option>Polishing Package ($75–$300)</option>
+              <option>Optic / Scope Install ($60–$100)</option>
+              <option>Custom AR Build (from $600)</option>
+              <option>Precision Rifle Build (from $800)</option>
+              <option>Competition Rifle Build (from $1,200)</option>
+              <option>Full Custom Package (from $1,500)</option>
+              <option>BFC Merch / Challenge Coins</option>
+              <option>Other / Free Consultation</option>
             </select>
           </div>
           <div class="form-row"><label>// Mission Brief</label><textarea placeholder="Describe your build requirements..."></textarea></div>
